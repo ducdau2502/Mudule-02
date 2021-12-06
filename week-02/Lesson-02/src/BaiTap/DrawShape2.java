@@ -3,8 +3,8 @@ package BaiTap;
 import java.util.Scanner;
 
 public class DrawShape2 {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
         int choice2 = 0;
@@ -25,7 +25,18 @@ public class DrawShape2 {
                     }
                     break;
                 case 2:
+                    while (choice2 != 5) {
+                    Scanner scanner2 = new Scanner(System.in);
+                    System.out.println("1. Draw the rectangle 1");
+                    System.out.println("2. Draw the rectangle 2");
+                    System.out.println("3. Draw the rectangle 3");
+                    System.out.println("4. Draw the rectangle 4");
+                    System.out.println("5. Exit!!");
+                    System.out.println("Enter your choice:");
+                    choice2 = scanner2.nextInt();
                     Rectangle(choice2);
+                }
+                    break;
                 case 3:
                     System.exit(0);
                 default:
@@ -35,17 +46,7 @@ public class DrawShape2 {
         }
     }
 
-    public static String Rectangle(int choiceNumber) {
-        choiceNumber = 0;
-        while (choiceNumber != 5) {
-            Scanner scanner2 = new Scanner(System.in);
-            System.out.println("1. Draw the rectangle 01");
-            System.out.println("2. Draw the rectangle 02");
-            System.out.println("3. Draw the rectangle 03");
-            System.out.println("4. Draw the rectangle 04");
-            System.out.println("5. Exit");
-            System.out.println("Enter your choice: ");
-            choiceNumber = scanner2.nextInt();
+    public static Integer Rectangle(int choiceNumber) {
 
             switch (choiceNumber) {
                 case 1:
@@ -96,7 +97,7 @@ public class DrawShape2 {
                 case 5:
                     break;
             }
-        }
-        return String.valueOf(choiceNumber);
+        return choiceNumber;
     }
+
 }
