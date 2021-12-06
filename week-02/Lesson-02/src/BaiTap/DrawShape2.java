@@ -25,29 +25,26 @@ public class DrawShape2 {
                     }
                     break;
                 case 2:
-                    while (choice2 != 5) {
-                    Scanner scanner2 = new Scanner(System.in);
-                    System.out.println("1. Draw the rectangle 1");
-                    System.out.println("2. Draw the rectangle 2");
-                    System.out.println("3. Draw the rectangle 3");
-                    System.out.println("4. Draw the rectangle 4");
-                    System.out.println("5. Exit!!");
-                    System.out.println("Enter your choice:");
-                    choice2 = scanner2.nextInt();
                     Rectangle(choice2);
-                }
                     break;
                 case 3:
                     System.exit(0);
                 default:
                     System.out.println("No choice!!!");
             }
-
         }
     }
 
     public static Integer Rectangle(int choiceNumber) {
-
+        while (choiceNumber != 5) {
+            Scanner scanner2 = new Scanner(System.in);
+            System.out.println("1. Draw the rectangle 1");
+            System.out.println("2. Draw the rectangle 2");
+            System.out.println("3. Draw the rectangle 3");
+            System.out.println("4. Draw the rectangle 4");
+            System.out.println("5. Back!!");
+            System.out.println("Enter your choice:");
+            choiceNumber = scanner2.nextInt();
             switch (choiceNumber) {
                 case 1:
                     for (int i = 0; i < 5; i++) {
@@ -97,6 +94,7 @@ public class DrawShape2 {
                 case 5:
                     break;
             }
+        }
         return choiceNumber;
     }
 

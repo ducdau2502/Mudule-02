@@ -31,7 +31,7 @@ public class DrawShape {
                         System.out.println("2. Draw the rectangle 02");
                         System.out.println("3. Draw the rectangle 03");
                         System.out.println("4. Draw the rectangle 04");
-                        System.out.println("5. Exit");
+                        System.out.println("5. Back");
                         System.out.println("Enter your choice: ");
                         choice2 = scanner.nextInt();
 
