@@ -19,7 +19,7 @@ public class TotalCol {
 
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length1; j++) {
-                System.out.print("Nhập vào phần tử dòng " + (i + 1) + " dòng " + (j + 1) + ": ");
+                System.out.print("Nhập vào phần tử dòng " + (i + 1) + " cột " + (j + 1) + ": ");
                 array[i][j] = scanner.nextInt();
             }
         }

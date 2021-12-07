@@ -17,7 +17,7 @@ public class MaxElement {
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                System.out.print("Nhập vào phần tử dòng " + (i + 1) + " dòng " + (j + 1) + ": ");
+                System.out.print("Nhập vào phần tử dòng " + (i + 1) + " cột " + (j + 1) + ": ");
                 arr[i][j] = scanner.nextInt();
             }
         }

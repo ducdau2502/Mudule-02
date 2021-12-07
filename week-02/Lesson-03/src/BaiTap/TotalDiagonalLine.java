@@ -20,7 +20,7 @@ public class TotalDiagonalLine {
         int i = 0;
         while (i < lengthArray) {
             for (int j = 0; j < lengthArray1; j++) {
-                System.out.print("Nhập vào phần tử dòng " + (i + 1) + " dòng " + (j + 1) + ": ");
+                System.out.print("Nhập vào phần tử dòng " + (i + 1) + " cột " + (j + 1) + ": ");
                 arr[i][j] = scan.nextInt();
             }
             i++;
