@@ -14,6 +14,10 @@ public class Main {
 
         QuadraticEquation quad = new QuadraticEquation(number1, number2, number3);
 
+        displayResults(quad);
+    }
+
+    public static void displayResults(QuadraticEquation quad) {
         if (quad.getDiscriminant() > 0) {
             System.out.println("Phương trình có hai nghiệm: x1 = " + quad.getRoot1() + " và x2 = " + quad.getRoot2());
         } else if (quad.getDiscriminant() == 0) {

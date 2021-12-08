@@ -3,16 +3,16 @@ package BaiTap.StopWatch;
 public class Main {
     public static void main(String[] args) {
         int[] array = new int[100000];
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < args.length; i++) {
             array[i] = (int) (Math.random() * 100000);
         }
         StopWatch sw = new StopWatch();
 
         sw.start();
         selectionSort(array);
-        for (int i = 0; i < array.length; i++) {
-                System.out.print(array[i] + " ");
-        }
+//        for (int i = 0; i < array.length; i++) {
+//                System.out.print(array[i] + " ");
+//        }
         sw.stop();
 
         System.out.println("Time: " + sw.getElapsedTime());

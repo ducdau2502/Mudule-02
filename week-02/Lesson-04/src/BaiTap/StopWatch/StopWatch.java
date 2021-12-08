@@ -5,8 +5,6 @@ public class StopWatch {
     private long endTime;
 
     public StopWatch() {
-        startTime = System.currentTimeMillis();
-        endTime = System.currentTimeMillis();
     }
 
     public long getStartTime() {

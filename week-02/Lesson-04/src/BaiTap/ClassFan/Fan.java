@@ -70,8 +70,7 @@ public class Fan {
                     '}';
         }
         return "Fan{" +
-                "speed = " + getSpeed() +
-                ", radius = " + getRadius() +
+                "radius = " + getRadius() +
                 ", color = '" + getColor() +
                 "', fan is off" + '\'' +
                 '}';
