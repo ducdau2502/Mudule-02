@@ -5,6 +5,9 @@ public class Product {
     private String type;
     private final String unitMoney = "USD";
 
+    public Product() {
+    }
+
     public Product(int code, String name, long price, String type) {
         this.code = code;
         this.name = name;
