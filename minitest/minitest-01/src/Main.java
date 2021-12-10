@@ -9,39 +9,47 @@ public class Main {
 
         createArray(scanner, products);
 
-        FindProduct(scanner, products);
-
-        TotalPrice(products);
-
-        EditProduct(scanner, products);
-
-        Product[] result = DeleteProduct(scanner, products);
-
         for (Product k : products) {
             System.out.println(k);
-
         }
+
+        findProduct(scanner, products);
+
+        totalPrice(products);
+
+        editProduct(scanner, products);
+
+        Product[] result = deleteProduct(scanner, products);
+
         for (Product k : result) {
             System.out.println(k);
         }
 
     }
 
-    private static Product[] DeleteProduct(Scanner scanner, Product[] products) {
-        Product[] result = new Product[(products.length - 1)];
+    private static Product[] deleteProduct(Scanner scanner, Product[] products) {
         System.out.print("Nhập mã sản phẩm muốn xoá: ");
         int codeProduct = scanner.nextInt();
+
+        int count = 0;
+        for (Product k: products) {
+            if (codeProduct == k.getCode()) {
+                count++;
+            }
+        }
+
+        Product[] result = new Product[(products.length - count)];
+        int index = 0;
         for (int i = 0; i < products.length; i++) {
-            int c = 0;
             if (codeProduct != products[i].getCode()) {
-                result[c] = products[i];
-                c++;
+                result[index] = products[i];
+                index++;
             }
         }
         return result;
     }
 
-    private static void EditProduct(Scanner scanner, Product[] products) {
+    private static void editProduct(Scanner scanner, Product[] products) {
         System.out.print("Nhập mã sản phẩm muốn sửa: ");
         int codeProduct = scanner.nextInt();
         for (int i = 0; i < products.length; i++) {
@@ -62,7 +70,7 @@ public class Main {
         }
     }
 
-    private static void TotalPrice(Product[] products) {
+    private static void totalPrice(Product[] products) {
         long sum = 0;
         for (Product product : products) {
             sum += product.getPrice();
@@ -71,21 +79,17 @@ public class Main {
         System.out.println("Tổng giá các sản phẩm là: " + sum);
     }
 
-    private static void FindProduct(Scanner scanner, Product[] products) {
+    private static void findProduct(Scanner scanner, Product[] products) {
         System.out.print("Nhập tên sản phẩm muốn tìm: ");
         String nameProduct = scanner.nextLine();
         boolean flag = false;
-        int index = 0;
         for (int i = 0; i < products.length; i++) {
             if (nameProduct.equals(products[i].getName())) {
+                System.out.println(products[i].toString());
                 flag = true;
-                index = i;
-                break;
             }
         }
-        if (flag) {
-            System.out.println(products[index].toString());
-        } else {
+        if (!flag) {
             System.out.println("Không tìm thấy sản phầm nào");
         }
     }
@@ -93,6 +97,7 @@ public class Main {
     public static void createArray(Scanner scanner, Product[] products) {
 
         for (int i = 0; i < products.length; i++) {
+            System.out.println("Nhập sản phẩm thứ: " + (i + 1));
             System.out.print("Nhập mã sản phẩm: ");
             int code = scanner.nextInt();
             scanner.nextLine();
