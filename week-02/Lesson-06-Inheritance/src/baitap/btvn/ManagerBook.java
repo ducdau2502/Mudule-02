@@ -82,7 +82,7 @@ public class ManagerBook {
         System.out.print("Nhập giá muốn tìm: ");
         long price = scanner.nextLong();
         boolean flag = false;
-        for (Book book: books) {
+        for (Book book : books) {
             if (book.getPrice() == price) {
                 System.out.println(book);
                 flag = true;
@@ -100,7 +100,7 @@ public class ManagerBook {
         System.out.print("Nhập giá cao: ");
         long higherPrice = scanner.nextLong();
         if (lowerPrice <= higherPrice) {
-            for (Book book: books) {
+            for (Book book : books) {
                 if (book.getPrice() >= lowerPrice && book.getPrice() <= higherPrice) {
                     System.out.println(book);
                 }
@@ -210,7 +210,7 @@ public class ManagerBook {
     private static void totalPrice(Book[] books) {
         long sum = 0;
         for (Book b : books) {
-            sum += b.getPrice();
+            sum += b.getPrice() * b.getQuantity();
         }
         System.out.println("tổng giá sách là : " + sum);
     }
@@ -230,6 +230,7 @@ public class ManagerBook {
         while (i < books.length) {
             System.out.println("1. Nhập vào sách giáo khoa");
             System.out.println("2. Nhập vào tiểu thuyết");
+            System.out.println("3. Nhập vào sách thường");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             switch (choice) {
@@ -270,6 +271,23 @@ public class ManagerBook {
                     Novel novel = new Novel(name1, price1, quantityBook1, publicDate1, author);
                     Book book1 = novel;
                     books[i] = book1;
+                    i++;
+
+                    break;
+                case 3:
+                    scanner.nextLine();
+                    System.out.print("Nhập vào tên sách: ");
+                    String name2 = scanner.nextLine();
+                    System.out.print("Nhập vào giá: ");
+                    long price2 = scanner.nextLong();
+                    System.out.print("Nhập vào số lượng: ");
+                    int quantityBook2 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Nhập vào ngày xuất bản: ");
+                    String publicDate2 = scanner.nextLine();
+
+                    Book book2 = new Book(name2, price2, quantityBook2, publicDate2);
+                    books[i] = book2;
                     i++;
 
                     break;
