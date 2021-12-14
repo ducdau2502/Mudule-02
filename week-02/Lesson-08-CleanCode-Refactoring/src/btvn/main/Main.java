@@ -26,6 +26,7 @@ public class Main {
             System.out.println("7. Find student by gender");
             System.out.println("8. Range student by point");
             System.out.println("9. Edit student by id");
+            System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
