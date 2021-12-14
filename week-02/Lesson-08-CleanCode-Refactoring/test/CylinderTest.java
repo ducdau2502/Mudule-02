@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import thuchanh.refactormethol.Cylinder;
+import thuchanh.refactormethod.Cylinder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

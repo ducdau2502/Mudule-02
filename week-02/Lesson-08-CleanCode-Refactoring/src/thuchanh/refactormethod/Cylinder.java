@@ -1,4 +1,4 @@
-package thuchanh.refactormethol;
+package thuchanh.refactormethod;
 
 public class Cylinder {
     public static double getVolume(int radius, int height){
