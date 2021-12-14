@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>baitap.resizeableandcolorable.module.Square</OriginalElement>
+  <nodes>
+    <node x="480.75" y="0.0">baitap.resizeableandcolorable.module.Shape</node>
+    <node x="85.0" y="564.0">baitap.resizeableandcolorable.module.Square</node>
+    <node x="0.0" y="349.5">baitap.resizeableandcolorable.edible.Colorable</node>
+    <node x="180.0" y="238.0">baitap.resizeableandcolorable.module.Rectangle</node>
+    <node x="293.75" y="67.5">baitap.resizeableandcolorable.edible.Reziseable</node>
+    <node x="516.0" y="260.0">baitap.resizeableandcolorable.module.Circle</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="baitap.resizeableandcolorable.module.Square" target="baitap.resizeableandcolorable.module.Rectangle" relationship="GENERALIZATION">
+      <point x="62.0" y="-116.0" />
+      <point x="271.0" y="539.0" />
+      <point x="338.0" y="539.0" />
+      <point x="0.0" y="138.0" />
+    </edge>
+    <edge source="baitap.resizeableandcolorable.module.Circle" target="baitap.resizeableandcolorable.edible.Reziseable" relationship="REALIZATION">
+      <point x="-60.0" y="-116.0" />
+      <point x="576.0" y="218.0" />
+      <point x="377.25" y="218.0" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="baitap.resizeableandcolorable.module.Square" target="baitap.resizeableandcolorable.edible.Colorable" relationship="REALIZATION">
+      <point x="-62.0" y="-116.0" />
+      <point x="147.0" y="539.0" />
+      <point x="80.0" y="539.0" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="baitap.resizeableandcolorable.module.Rectangle" target="baitap.resizeableandcolorable.edible.Reziseable" relationship="REALIZATION">
+      <point x="-79.0" y="-138.0" />
+      <point x="259.0" y="218.0" />
+      <point x="377.25" y="218.0" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="baitap.resizeableandcolorable.module.Rectangle" target="baitap.resizeableandcolorable.module.Shape" relationship="GENERALIZATION">
+      <point x="79.0" y="-138.0" />
+      <point x="417.0" y="208.0" />
+      <point x="577.75" y="208.0" />
+      <point x="0.0" y="94.0" />
+    </edge>
+    <edge source="baitap.resizeableandcolorable.module.Circle" target="baitap.resizeableandcolorable.module.Shape" relationship="GENERALIZATION">
+      <point x="60.0" y="-116.0" />
+      <point x="696.0" y="208.0" />
+      <point x="577.75" y="208.0" />
+      <point x="0.0" y="94.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.2999999999999998" showDependencies="false" x="254.7463370242406" y="364.4615384615385" />
+  <SelectedNodes>
+    <node>baitap.resizeableandcolorable.module.Shape</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
