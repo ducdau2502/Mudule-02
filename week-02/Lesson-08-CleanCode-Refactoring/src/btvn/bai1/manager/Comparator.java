@@ -1,6 +1,6 @@
-package btvn.manager;
+package btvn.bai1.manager;
 
-import btvn.module.Student;
+import btvn.bai1.module.Student;
 
 public class Comparator extends Student implements java.util.Comparator<Student> {
     public Comparator() {

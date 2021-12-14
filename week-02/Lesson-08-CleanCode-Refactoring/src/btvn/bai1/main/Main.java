@@ -1,7 +1,7 @@
-package btvn.main;
+package btvn.bai1.main;
 
-import btvn.manager.ManagerStudent;
-import btvn.module.Student;
+import btvn.bai1.manager.ManagerStudent;
+import btvn.bai1.module.Student;
 
 import java.util.Scanner;
 

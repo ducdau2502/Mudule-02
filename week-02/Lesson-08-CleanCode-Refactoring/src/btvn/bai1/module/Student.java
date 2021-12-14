@@ -1,4 +1,4 @@
-package btvn.module;
+package btvn.bai1.module;
 
 public class Student {
     private String name;
