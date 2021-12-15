@@ -143,6 +143,12 @@ public class ManagerStudent {
                 System.out.println(student);
             }
         }
+//        Arrays.sort(students);
+//        for (Student student : students) {
+//            if (student != null) {
+//                System.out.println(student);
+//            }
+//        }
     }
 
     public void editStudentById(Scanner scanner) {
