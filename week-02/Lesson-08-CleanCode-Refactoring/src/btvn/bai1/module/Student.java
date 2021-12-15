@@ -6,18 +6,20 @@ public class Student {
     private String gender;
     private String address;
     private double averagePoint;
+    private static int VALUE = 1;
     private int id;
 
     public Student() {
     }
 
-    public Student(String name, int age, String gender, String address, double averagePoint, int id) {
+    public Student(String name, int age, String gender, String address, double averagePoint) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.address = address;
         this.averagePoint = averagePoint;
-        this.id = id;
+        this.id = VALUE;
+        VALUE++;
     }
 
     public String getName() {

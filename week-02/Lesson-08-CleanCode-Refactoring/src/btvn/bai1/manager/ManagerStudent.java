@@ -8,37 +8,12 @@ import java.util.Scanner;
 public class ManagerStudent {
     public Student[] students;
     public static int index = 0;
-    public int id = 1;
 
     public ManagerStudent() {
     }
 
     public ManagerStudent(Student[] students) {
         this.students = students;
-    }
-
-    public Student[] getStudents() {
-        return students;
-    }
-
-    public void setStudents(Student[] students) {
-        this.students = students;
-    }
-
-    public static int getIndex() {
-        return index;
-    }
-
-    public static void setIndex(int index) {
-        ManagerStudent.index = index;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void addStudent(Scanner scanner) {
@@ -55,9 +30,8 @@ public class ManagerStudent {
         System.out.print("Enter average point: ");
         double averagePoint = scanner.nextDouble();
 
-        students[index] = new Student(name, age, gender, address, averagePoint, id);
+        students[index] = new Student(name, age, gender, address, averagePoint);
         index++;
-        id++;
     }
 
     public void displayAllStudent() {
@@ -136,7 +110,7 @@ public class ManagerStudent {
 
     public void rangeStudentByAveragePoint() {
         Comparator comparator = new Comparator();
-        Arrays.sort(students, comparator);
+        Arrays.sort(students, new Comparator());
 
         for (Student student : students) {
             if (student != null) {

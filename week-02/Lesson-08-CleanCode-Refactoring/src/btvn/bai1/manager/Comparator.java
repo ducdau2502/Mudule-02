@@ -6,8 +6,8 @@ public class Comparator extends Student implements java.util.Comparator<Student>
     public Comparator() {
     }
 
-    public Comparator(String name, int age, String gender, String address, double averagePoint, int id) {
-        super(name, age, gender, address, averagePoint, id);
+    public Comparator(String name, int age, String gender, String address, double averagePoint) {
+        super(name, age, gender, address, averagePoint);
     }
 
     @Override

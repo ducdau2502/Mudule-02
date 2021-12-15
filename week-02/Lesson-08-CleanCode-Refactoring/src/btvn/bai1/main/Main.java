@@ -33,7 +33,6 @@ public class Main {
             switch (choice) {
                 case 1:
                     managerStudent.addStudent(scanner);
-                    System.out.println(ManagerStudent.getIndex());
                     break;
                 case 2:
                     managerStudent.displayAllStudent();
