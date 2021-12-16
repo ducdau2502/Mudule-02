@@ -24,9 +24,8 @@ public class MyList<E> {
         if (size == elements.length) {
             ensureCapacity();
         }
-
-        for (int i = index; i < size; i++) {
-            elements[i] = elements[i++];
+        for (int i = size ; i > index; i--) {
+            elements[i] = elements[i - 1];
         }
         elements[index] = element;
         size++;
@@ -84,7 +83,7 @@ public class MyList<E> {
     }
 
     public void clear() {
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             elements[i] = null;
         }
         size = 0;

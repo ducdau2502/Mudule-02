@@ -14,6 +14,7 @@ public class MyListTest {
         myList.add(4, 8);
         myList.add(5, 6);
         myList.add(6, 7);
+        myList.add(2, 10);
         printData(myList);
 
         myList.remove(2);
