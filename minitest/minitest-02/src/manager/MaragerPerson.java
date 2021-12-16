@@ -3,14 +3,11 @@ package manager;
 import module.Person;
 import module.Student;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 public class MaragerPerson implements Manager {
     Scanner scanner = new Scanner(System.in);
-    public ArrayList<Person> people = new ArrayList<>();
+    public List<Person> people = new ArrayList<>();
 
     @Override
     public void displayAllPerson() {
@@ -81,10 +78,6 @@ public class MaragerPerson implements Manager {
 
     @Override
     public void rangeByAvgPoint() {
-        Comparator comparator = new module.Comparator();
-        for (Person person : people) {
-            if (person instanceof Student) Arrays.sort(new Person[]{person}, comparator);
-        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package thuchanh.simplelinkedlist;
 
+import java.util.LinkedList;
+
 public class MyLinkedListTest {
     public static void main(String[] args) {
         System.out.println("/=/=/=/= TESTING /=/=/=/=");
@@ -12,6 +14,9 @@ public class MyLinkedListTest {
         ll.add(4,9);
         ll.add(4,9);
         ll.printList();
+
+        LinkedList<Integer> integers = new LinkedList<>();
+        integers.clear();
 
         System.out.println(ll.get(3));
         System.out.println(ll.get(4));
