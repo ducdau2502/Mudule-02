@@ -7,7 +7,11 @@ import java.util.*;
 
 public class MaragerPerson implements Manager {
     Scanner scanner = new Scanner(System.in);
-    public List<Person> people = new ArrayList<>();
+    public List<Person> people;
+
+    public MaragerPerson() {
+        this.people = new ArrayList<>();
+    }
 
     @Override
     public void displayAllPerson() {

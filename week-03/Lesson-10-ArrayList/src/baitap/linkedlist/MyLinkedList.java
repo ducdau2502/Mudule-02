@@ -1,7 +1,5 @@
 package baitap.linkedlist;
 
-import java.util.LinkedList;
-
 public class MyLinkedList<E> {
     private Node head;
     public int numNodes = 0;
@@ -10,18 +8,17 @@ public class MyLinkedList<E> {
     }
 
     public void add(int index, E e) {
-        if (index == 0) addFirst(e);
-        else if (index >= numNodes) addLast(e);
-        else {
-            Node current = head;
-            for (int i = 1; i < index; i++)
-                current = current.next;
-            Node temp = current.next;
-            current.next = new Node(e);
-            (current.next).next = temp;
-            numNodes++;
+        Node temp = head;
+        Node holder;
+
+        for (int i = 0; i < index - 1 && temp.next != null; i++) {
+            temp = temp.next;
         }
-        }
+        holder = temp.next;
+        temp.next = new Node(e);
+        temp.next.next = holder;
+        numNodes++;
+    }
 
     public void addFirst(E e) {
         Node temp = new Node(e);
@@ -35,7 +32,9 @@ public class MyLinkedList<E> {
             addFirst(e);
         else {
             Node temp = head;
-            while (temp.next != null) temp = temp.next;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
             temp.next = new Node(e);
         }
         numNodes++;
@@ -96,13 +95,13 @@ public class MyLinkedList<E> {
     }
 
     public boolean add(E e) {
-            Node current = head;
-            for (int i = 1; i < indexOf(e); i++) {
-                current = current.next;
-            }
-            Node temp = current.next;
-            current.next = new Node(e);
-            (current.next).next = temp;
+        Node current = head;
+        for (int i = 1; i < indexOf(e); i++) {
+            current = current.next;
+        }
+        Node temp = current.next;
+        current.next = new Node(e);
+        (current.next).next = temp;
         numNodes++;
         return true;
     }

@@ -4,6 +4,7 @@ public class MyLinkedListTest {
     public static void main(String[] args) {
         MyLinkedList<Integer> myList = new MyLinkedList<>();
 
+        myList.addFirst(2);
         myList.add(0,7);
         myList.add(1,10);
         myList.add(2,8);
