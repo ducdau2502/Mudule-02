@@ -41,6 +41,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student@name=" + name + ",age=" + age + ",address=" + address;
+        return "Student name=" + name + ",age=" + age + ",address=" + address;
     }
 }
