@@ -6,6 +6,7 @@ import btvn.module.Dog;
 import btvn.module.Mouse;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ManagerAnimal {
@@ -66,7 +67,9 @@ public class ManagerAnimal {
                 System.out.print("Enter name: ");
                 String name = scanner.nextLine();
                 checkName(name);
-                animal.setName(name);
+                if (!Objects.equals(name, "")) {
+                    animal.setName(name);
+                }
                 System.out.print("Enter age: ");
                 int age = scanner.nextInt();
                 animal.setAge(age);
@@ -96,7 +99,7 @@ public class ManagerAnimal {
     }
 
     public void displayBySpecies(int choice) {
-        for(Animal animal : animals) {
+        for (Animal animal : animals) {
             if (choice == 1 && animal instanceof Dog) {
                 System.out.println(animal);
             } else if (choice == 2 && animal instanceof Cat) {
@@ -108,7 +111,7 @@ public class ManagerAnimal {
     }
 
     public void displayByWeight(double lowerWeight, double higherWeight) {
-        for(Animal animal : animals) {
+        for (Animal animal : animals) {
             if (animal.getWeight() >= lowerWeight && animal.getWeight() <= higherWeight) {
                 System.out.println(animal);
             }
