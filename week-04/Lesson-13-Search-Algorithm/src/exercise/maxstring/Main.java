@@ -1,4 +1,4 @@
-package practice.maxstring;
+package exercise.maxstring;
 
 import java.util.LinkedList;
 import java.util.Scanner;

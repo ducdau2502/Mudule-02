@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b61e8124-8e73-4225-83c9-c3c2e80976d4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/exercise/binarysearch/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/exercise/findmaxstring/MaxString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/practice/AlgorithmComplexity/AlgorithmComplexityTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/practice/binarysearch/BinarySearch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/practice/maxstring/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="b61e8124-8e73-4225-83c9-c3c2e80976d4" name="Changes" comment="add lesson 13" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +73,7 @@
       </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="practice.maxstring.Main" />
+      <option name="MAIN_CLASS_NAME" value="exercise.maxstring.Main" />
       <module name="Lesson-13-Search-Algorithm" />
       <extension name="coverage">
         <pattern>
@@ -122,8 +116,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1640049746534</updated>
-      <workItem from="1640049747893" duration="6365000" />
+      <workItem from="1640049747893" duration="6761000" />
     </task>
+    <task id="LOCAL-00001" summary="add lesson 13">
+      <created>1640060698084</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640060698084</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,5 +141,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add lesson 13" />
+    <option name="LAST_COMMIT_MESSAGE" value="add lesson 13" />
   </component>
 </project>
