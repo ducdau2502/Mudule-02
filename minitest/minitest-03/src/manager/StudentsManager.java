@@ -3,6 +3,7 @@ package manager;
 import models.Student;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class StudentsManager {
@@ -98,7 +99,7 @@ public class StudentsManager {
     }
 
     public ArrayList<Student> rangeStudentByPoint() {
-        students.sort((o1, o2) -> (int) (o1.averagePoint() - o2.averagePoint()));
+        students.sort(Comparator.comparingDouble(Student::averagePoint));
         System.out.printf("%-5S%-12S%-5S%-10S%-10S%-10S%S\n", "id", "Full name", "age", "math", "physics", "chemistry", "average");
         return students;
     }

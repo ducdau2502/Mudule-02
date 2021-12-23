@@ -23,7 +23,7 @@ public class Main {
             System.out.println("6. Range student by average point");
             System.out.println("7. Find student who have maximum average point");
             System.out.println("0. Exit");
-            System.out.print("Enter you choice: ");
+            System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
