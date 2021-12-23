@@ -3,6 +3,7 @@ package manager;
 import models.Student;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StudentsManager {
@@ -20,25 +21,25 @@ public class StudentsManager {
         }
     }
 
-    public Student addStudent() {
-        System.out.print("Enter full name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
-        System.out.print("Enter math point: ");
-        double mathPoint = scanner.nextDouble();
-        System.out.print("Enter physics point: ");
-        double physicsPoint = scanner.nextDouble();
-        System.out.print("Enter chemistry point: ");
-        double chemistryPoint = scanner.nextDouble();
-        scanner.nextLine();
-        Student student = new Student(name, age, mathPoint, physicsPoint, chemistryPoint);
-        students.add(student);
-        System.out.printf("%-5S%-12S%-5S%-10S%-10S%-10S%S\n", "id", "Full name", "age", "math", "physics", "chemistry", "average");
-        return student;
+    public Student addStudent() throws Exception {
+            System.out.print("Enter full name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter age: ");
+            int age = scanner.nextInt();
+            System.out.print("Enter math point: ");
+            double mathPoint = scanner.nextDouble();
+            System.out.print("Enter physics point: ");
+            double physicsPoint = scanner.nextDouble();
+            System.out.print("Enter chemistry point: ");
+            double chemistryPoint = scanner.nextDouble();
+            scanner.nextLine();
+            Student student = new Student(name, age, mathPoint, physicsPoint, chemistryPoint);
+            students.add(student);
+            System.out.printf("%-5S%-12S%-5S%-10S%-10S%-10S%S\n", "id", "Full name", "age", "math", "physics", "chemistry", "average");
+            return student;
     }
 
-    public Student editStudentById(int id) {
+    public Student editStudentById(int id) throws Exception {
         Student student = null;
         for (Student stu : students) {
             if (stu.getId() == id) {

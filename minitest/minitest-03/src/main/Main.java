@@ -4,6 +4,7 @@ import manager.StudentsManager;
 import models.Student;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -26,25 +27,41 @@ public class Main {
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println(studentsManager.addStudent());
+                    try {
+                        System.out.println(studentsManager.addStudent());
+                    } catch (Exception e) {
+                        System.out.println("Error format input");
+                    }
                     break;
                 case 2:
                     studentsManager.displayAllStudent();
                     break;
                 case 3:
-                    System.out.print("Enter student's id you want to edit: ");
-                    int editId = scanner.nextInt();
-                    System.out.println(studentsManager.editStudentById(editId));
+                    try {
+                        System.out.print("Enter student's id you want to edit: ");
+                        int editId = scanner.nextInt();
+                        System.out.println(studentsManager.editStudentById(editId));
+                    } catch (Exception e) {
+                        System.out.println("Error format input");
+                    }
                     break;
                 case 4:
-                    System.out.print("Enter student's id you want to remove: ");
-                    int deleteId = scanner.nextInt();
-                    System.out.println(studentsManager.deleteStudentById(deleteId));
+                    try {
+                        System.out.print("Enter student's id you want to remove: ");
+                        int deleteId = scanner.nextInt();
+                        System.out.println(studentsManager.deleteStudentById(deleteId));
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error format input");
+                    }
                     break;
                 case 5:
-                    System.out.print("Enter student's id you want to find: ");
-                    int findId = scanner.nextInt();
-                    studentsManager.findStudentById(findId);
+                    try {
+                        System.out.print("Enter student's id you want to find: ");
+                        int findId = scanner.nextInt();
+                        studentsManager.findStudentById(findId);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error format input");
+                    }
                     break;
                 case 6:
                     ArrayList<Student> students1 = studentsManager.rangeStudentByPoint();
@@ -56,7 +73,6 @@ public class Main {
                     studentsManager.findMaxAveragePoint();
                     break;
             }
-
         } while (choice != 0);
     }
 }
