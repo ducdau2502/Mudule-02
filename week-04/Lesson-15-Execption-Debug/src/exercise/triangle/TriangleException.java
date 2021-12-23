@@ -1,23 +1,24 @@
 package exercise.triangle;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TriangleException {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Hãy nhập x: ");
-        int x = scanner.nextInt();
-        System.out.println("Hãy nhập y: ");
-        int y = scanner.nextInt();
-        System.out.println("Hãy nhập z: ");
-        int z = scanner.nextInt();
-
         try {
+            System.out.print("Hãy nhập x: ");
+            int x = scanner.nextInt();
+            System.out.print("Hãy nhập y: ");
+            int y = scanner.nextInt();
+            System.out.print("Hãy nhập z: ");
+            int z = scanner.nextInt();
             calculate(x, y, z);
+        } catch (InputMismatchException e) {
+            System.out.println("lỗi định dạng....!!!!!!!!!!");
         } catch (IllegalTriangleException e) {
-            System.out.println("Lỗi rồi đmm " + e.getMessage());
+            System.out.println("đây không phải ba cạnh của tam giác.....!!!!!");
         }
-
     }
 
     private static void calculate(int x, int y, int z) throws IllegalTriangleException {
