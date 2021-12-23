@@ -3,7 +3,6 @@ package manager;
 import models.Student;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StudentsManager {
@@ -21,7 +20,7 @@ public class StudentsManager {
         }
     }
 
-    public Student addStudent() throws Exception {
+    public Student addStudent() {
             System.out.print("Enter full name: ");
             String name = scanner.nextLine();
             System.out.print("Enter age: ");
@@ -39,7 +38,7 @@ public class StudentsManager {
             return student;
     }
 
-    public Student editStudentById(int id) throws Exception {
+    public Student editStudentById(int id) {
         Student student = null;
         for (Student stu : students) {
             if (stu.getId() == id) {
