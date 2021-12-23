@@ -21,21 +21,24 @@ public class StudentsManager {
     }
 
     public Student addStudent() {
-            System.out.print("Enter full name: ");
-            String name = scanner.nextLine();
-            System.out.print("Enter age: ");
-            int age = scanner.nextInt();
-            System.out.print("Enter math point: ");
-            double mathPoint = scanner.nextDouble();
-            System.out.print("Enter physics point: ");
-            double physicsPoint = scanner.nextDouble();
-            System.out.print("Enter chemistry point: ");
-            double chemistryPoint = scanner.nextDouble();
-            scanner.nextLine();
-            Student student = new Student(name, age, mathPoint, physicsPoint, chemistryPoint);
-            students.add(student);
-            System.out.printf("%-5S%-12S%-5S%-10S%-10S%-10S%S\n", "id", "Full name", "age", "math", "physics", "chemistry", "average");
-            return student;
+        System.out.print("Enter full name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter age: ");
+        int age = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter math point: ");
+        double mathPoint = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Enter physics point: ");
+        double physicsPoint = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Enter chemistry point: ");
+        double chemistryPoint = scanner.nextDouble();
+        scanner.nextLine();
+        Student student = new Student(name, age, mathPoint, physicsPoint, chemistryPoint);
+        students.add(student);
+        System.out.printf("%-5S%-12S%-5S%-10S%-10S%-10S%S\n", "id", "Full name", "age", "math", "physics", "chemistry", "average");
+        return student;
     }
 
     public Student editStudentById(int id) {
@@ -53,12 +56,15 @@ public class StudentsManager {
             student.setName(updateName);
             System.out.print("Update age: ");
             int updateAge = scanner.nextInt();
+            scanner.nextLine();
             student.setAge(updateAge);
             System.out.print("Update math point: ");
             double updateMathPoint = scanner.nextDouble();
+            scanner.nextLine();
             student.setMathPoint(updateMathPoint);
             System.out.print("Update physics point: ");
             double updatePhysicsPoint = scanner.nextDouble();
+            scanner.nextLine();
             student.setPhysicsPoint(updatePhysicsPoint);
             System.out.print("Update chemistry point: ");
             double updateChemistryPoint = scanner.nextDouble();
