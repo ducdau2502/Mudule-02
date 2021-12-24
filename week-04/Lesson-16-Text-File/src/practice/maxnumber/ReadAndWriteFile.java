@@ -2,7 +2,6 @@ package practice.maxnumber;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 
 public class ReadAndWriteFile {
