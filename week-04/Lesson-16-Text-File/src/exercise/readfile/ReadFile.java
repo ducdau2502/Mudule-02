@@ -93,7 +93,7 @@ public class ReadFile {
         countries.add(country2);
         countries.add(country3);
 
-        writeCsvFile("src/exercise/readfile/country.txt", countries);
-        readCsvFile("src/exercise/readfile/country.txt");
+        writeCsvFile("src/exercise/readfile/country.csv", countries);
+        readCsvFile("src/exercise/readfile/country.csv");
     }
 }
