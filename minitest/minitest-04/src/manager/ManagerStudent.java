@@ -12,7 +12,7 @@ public class ManagerStudent {
     Scanner scanner = new Scanner(System.in);
 
     public ManagerStudent() {
-        this.students = new ArrayList<>();
+        this.students = readFile(PATH_NAME);
     }
 
     public ArrayList<Student> getStudents() {
@@ -184,6 +184,7 @@ public class ManagerStudent {
     public void writeFile(ArrayList<Student> students, String path) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
+//            bufferedWriter.append("id,name,age,mathPoint,physicsPoint,chemistryPoint \n");
             for (Student student : students) {
                 bufferedWriter.append(String.valueOf(student.getId()));
                 bufferedWriter.append(",");
