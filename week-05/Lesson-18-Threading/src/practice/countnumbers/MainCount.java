@@ -1,7 +1,7 @@
 package practice.countnumbers;
 
 public class MainCount {
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         Count count = new Count();
         try
