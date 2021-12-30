@@ -8,13 +8,6 @@ public class Student extends Person {
     public Student() {
     }
 
-    public Student(String name, int age, double mathPoint, double physicsPoint, double chemistryPoint) {
-        super(name, age);
-        this.mathPoint = mathPoint;
-        this.physicsPoint = physicsPoint;
-        this.chemistryPoint = chemistryPoint;
-    }
-
     public Student(int id, String name, int age, double mathPoint, double physicsPoint, double chemistryPoint) {
         super(id, name, age);
         this.mathPoint = mathPoint;

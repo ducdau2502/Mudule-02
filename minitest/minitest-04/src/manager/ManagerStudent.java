@@ -4,6 +4,7 @@ import module.Student;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class ManagerStudent {
@@ -30,7 +31,22 @@ public class ManagerStudent {
         }
     }
 
+    private boolean checkId(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Student addStudent() {
+        int id;
+        do {
+            System.out.print("Enter student id: ");
+            id = scanner.nextInt();
+        } while (checkId(id));
+        scanner.nextLine();
         System.out.print("Enter student name: ");
         String name = scanner.nextLine();
         System.out.print("Enter student age: ");
@@ -43,7 +59,7 @@ public class ManagerStudent {
         double chemistryPoint = scanner.nextDouble();
         scanner.nextLine();
 
-        Student student = new Student(name, age, mathPoint, physicsPoint, chemistryPoint);
+        Student student = new Student(id, name, age, mathPoint, physicsPoint, chemistryPoint);
         students.add(student);
         writeFile(students, PATH_NAME);
         System.out.println("Add student named: " + student.getName() + "successful...!!!");
@@ -131,24 +147,14 @@ public class ManagerStudent {
     }
 
     public ArrayList<Student> RangeLowToHigh() {
-        ArrayList<Student> students1 = new ArrayList<>();
-        students1.addAll(students);
+        ArrayList<Student> students1 = new ArrayList<>(students);
 
-        students1.sort((o1, o2) -> {
-            if (o1.averagePoint() > o2.averagePoint()) {
-                return 2;
-            } else if (o1.averagePoint() < o2.averagePoint()) {
-                return -2;
-            } else {
-                return 0;
-            }
-        });
+        students1.sort(Comparator.comparingDouble(Student::averagePoint));
         return students1;
     }
 
     public ArrayList<Student> RangeHighToLow() {
-        ArrayList<Student> students2 = new ArrayList<>();
-        students2.addAll(students);
+        ArrayList<Student> students2 = new ArrayList<>(students);
 
         students2.sort((o1, o2) -> {
             if (o1.averagePoint() < o2.averagePoint()) {
@@ -184,7 +190,7 @@ public class ManagerStudent {
     public void writeFile(ArrayList<Student> students, String path) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
-//            bufferedWriter.append("id,name,age,mathPoint,physicsPoint,chemistryPoint \n");
+//            bufferedWriter.append("id,name,age,mathPoint,physicsPoint,chemistryPoint\n");
             for (Student student : students) {
                 bufferedWriter.append(String.valueOf(student.getId()));
                 bufferedWriter.append(",");

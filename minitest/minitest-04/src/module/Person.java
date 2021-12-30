@@ -1,18 +1,11 @@
 package module;
 
 public class Person {
-    private static int VALUE = 0;
     private int id;
     private String name;
     private int age;
 
     public Person() {
-    }
-
-    public Person(String name, int age) {
-        this.id = ++VALUE;
-        this.name = name;
-        this.age = age;
     }
 
     public Person(int id, String name, int age) {
