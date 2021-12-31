@@ -17,7 +17,7 @@ public class Gun {
             for (int j = 0; j < plist.size(); j++) {
                 Bullet pp = plist.get(j);
                 pp.move();
-                System.out.println("-" + pp.getPosition());
+                System.out.print("-" + pp.getPosition());
 
                 if (pp.getPosition() == 10) {
                     pool.freeItem(pp);
