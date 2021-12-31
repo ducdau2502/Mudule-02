@@ -22,6 +22,7 @@ public class BookBorrower {
     }
 
     public void returnBook(){
+        haveBook = false;
         borrowedBook.returnBook(borrowedBook);
     }
 }
