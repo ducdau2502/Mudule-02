@@ -1,10 +1,11 @@
 package module;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AccountFactory {
+public class AccountFactory implements Serializable {
     private static Pattern pattern;
     private static final String REGEX = "^(?!\\d+$)\\w+$";
 

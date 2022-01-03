@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainAccount {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private static Pattern pattern;
     private static final String NUMBER_REGEX = "^(\\d+)$";
     ManagerAccount managerAccount = new ManagerAccount();
@@ -51,46 +51,54 @@ public class MainAccount {
                     break;
                 case 3:
                     managerAccount.displayALlAccount();
-                    int updateNumber;
-                    do {
-                        System.out.print("Nhập vào số thứ tự của tài khoản: ");
-                        updateNumber = scanner.nextInt();
-                    } while (validateNumber(Integer.toString(updateNumber)));
-                    Account account = managerAccount.updateAccount(updateNumber);
-                    if (account != null) {
-                        System.out.println("Sửa tài khoản thành công");
-                        System.out.println(account);
-                    } else {
-                        System.out.println("Sửa tài khoản thất bại");
-                    }
+                    updateAccount();
                     break;
                 case 4:
                     managerAccount.displayALlAccount();
-                    int deleteNumber;
-                    do {
-                        System.out.print("Nhập vào số thứ tự của tài khoản: ");
-                        deleteNumber = scanner.nextInt();
-                    } while (validateNumber(Integer.toString(deleteNumber)));
-                    int choice1;
-                        do {
-                            System.out.println("1. Xoá");
-                            System.out.println("0. Không");
-                            System.out.print("Nhập vào lựa chọn của bạn: ");
-                            choice1 = scanner.nextInt();
-                            scanner.nextLine();
-                        } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 1);
-                        if (choice1 == 1) {
-                                boolean deleteAccount = managerAccount.deleteAccount(deleteNumber);
-                                if (deleteAccount) {
-                                    System.out.println("Xoá tài khoản thành công");
-                                } else {
-                                    System.out.println("Xoá tài khoản thất bại");
-                                }
-                        }
+                    deleteAccount();
                     break;
             }
 
 
         } while (choice != 0);
+    }
+
+    private void deleteAccount() {
+        int deleteNumber;
+        do {
+            System.out.print("Nhập vào số thứ tự của tài khoản: ");
+            deleteNumber = scanner.nextInt();
+        } while (validateNumber(Integer.toString(deleteNumber)));
+        int choice1;
+        do {
+            System.out.println("1. Xoá");
+            System.out.println("0. Không");
+            System.out.print("Nhập vào lựa chọn của bạn: ");
+            choice1 = scanner.nextInt();
+            scanner.nextLine();
+        } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 1);
+        if (choice1 == 1) {
+                boolean deleteAccount = managerAccount.deleteAccount(deleteNumber);
+                if (deleteAccount) {
+                    System.out.println("Xoá tài khoản thành công");
+                } else {
+                    System.out.println("Xoá tài khoản thất bại");
+                }
+        }
+    }
+
+    private void updateAccount() {
+        int updateNumber;
+        do {
+            System.out.print("Nhập vào số thứ tự của tài khoản: ");
+            updateNumber = scanner.nextInt();
+        } while (validateNumber(Integer.toString(updateNumber)));
+        Account account = managerAccount.updateAccount(updateNumber);
+        if (account != null) {
+            System.out.println("Sửa tài khoản thành công");
+            System.out.println(account);
+        } else {
+            System.out.println("Sửa tài khoản thất bại");
+        }
     }
 }
