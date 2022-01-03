@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainAccount {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private static Pattern pattern;
     private static final String NUMBER_REGEX = "^(\\d+)$";
     ManagerAccount managerAccount = new ManagerAccount();

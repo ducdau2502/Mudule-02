@@ -10,17 +10,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ManagerAccount {
-    Scanner scanner = new Scanner(System.in);
-    AccountFactory accountFactory = new AccountFactory();
-    IOFile<Account> accountIOFile = new IOFile<>();
-    ArrayList<Account> accounts;
+    private final Scanner scanner = new Scanner(System.in);
+    private final AccountFactory accountFactory = new AccountFactory();
+    private final IOFile<Account> accountIOFile = new IOFile<>();
+    private final ArrayList<Account> accounts;
     private static Pattern pattern;
     private static final String REGEX = "^(?!\\d+$)\\w+$";
     private static final String PATH = "src/database/accounts";
 
     public ManagerAccount() {
         pattern = Pattern.compile(REGEX);
-        accounts = (ArrayList<Account>) accountIOFile.readDataFromFile(PATH);
+        accounts = accountIOFile.readFromFile(PATH);
     }
 
     private boolean validate(String regex) {

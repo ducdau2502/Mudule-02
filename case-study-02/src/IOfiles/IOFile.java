@@ -2,10 +2,9 @@ package IOfiles;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class IOFile<T> {
-    public void writeToFile(String path, List<T> t) {
+    public void writeToFile(String path, ArrayList<T> t) {
         try {
             FileOutputStream fos = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -17,20 +16,13 @@ public class IOFile<T> {
         }
     }
 
-    public  List<T> readDataFromFile(String path) {
-        List<T> t = new ArrayList<>();
-        File file = new File(path);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public  ArrayList<T> readFromFile(String path) {
+        ArrayList<T> t = new ArrayList<>();
+
         try {
             FileInputStream fis = new FileInputStream(path);
             ObjectInputStream ois = new java.io.ObjectInputStream(fis);
-            t = (List<T>) ois.readObject();
+            t = (ArrayList<T>) ois.readObject();
             ois.close();
             fis.close();
         }catch (IOException | ClassNotFoundException ios) {
