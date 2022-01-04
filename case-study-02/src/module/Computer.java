@@ -13,7 +13,7 @@ public class Computer implements Serializable {
     public Computer(int code) {
         this.code = code;
         this.status = false;
-        this.price = 20000;
+        this.price = 15000;
     }
 
     public boolean isStatus() {
@@ -44,8 +44,6 @@ public class Computer implements Serializable {
         this.code = code;
     }
 
-
-
     public double getPrice() {
         return price;
     }
@@ -58,6 +56,7 @@ public class Computer implements Serializable {
     public String toString() {
         return "Máy " +
                 "số = " + code +
-                ", trạng thái = " + getStatus();
+                ", trạng thái = " + getStatus() +
+                ", giá / giờ = " + getPrice();
     }
 }

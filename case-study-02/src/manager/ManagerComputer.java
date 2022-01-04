@@ -1,6 +1,7 @@
 package manager;
 
 import IOfiles.IOFile;
+import module.Account;
 import module.Computer;
 
 import java.util.ArrayList;
@@ -37,7 +38,21 @@ public class ManagerComputer {
         }
     }
 
-    
+    public void displayOnlineComputer() {
+        for (Computer computer : computers) {
+            if (computer.getStatus().equals("Online")) {
+                System.out.println(computer);
+            }
+        }
+    }
+
+    public void displayOfflineComputer() {
+        for (Computer computer : computers) {
+            if (computer.getStatus().equals("Offline")) {
+                System.out.println(computer);
+            }
+        }
+    }
 
     public Computer deleteComputer(int deleteNum) {
         Computer computer;
@@ -95,6 +110,12 @@ public class ManagerComputer {
         }
         computerIOFile.writeToFile(PATH, computers);
         return computer;
+    }
+
+    public void changePrice(double price) {
+        for (Computer computer : computers) {
+            computer.setPrice(price);
+        }
     }
 
 }
