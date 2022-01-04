@@ -12,26 +12,19 @@ public class ManagerComputer {
     private final Scanner scanner = new Scanner(System.in);
     private final IOFile<Computer> computerIOFile = new IOFile<>();
     private final ArrayList<Computer> computers;
-    private static Pattern patternInput;
     private static Pattern patternNumber;
-    private static final String REGEX_INPUT = "^(?!\\d+$)\\w+$";
-    private static final String REGEX_NUMBER = "^(\\w+)$";
+    private static final String REGEX_NUMBER = "^(\\d+)$";
 
     private static final String PATH = "src/database/computers";
 
     public ManagerComputer() {
-        patternInput = Pattern.compile(REGEX_INPUT);
         patternNumber = Pattern.compile(REGEX_NUMBER);
         this.computers = computerIOFile.readFromFile(PATH);
     }
 
-    private boolean validateInput(String regex) {
-        Matcher matcher = patternInput.matcher(regex);
-        return matcher.matches();
-    }
     private boolean validateNumber(String regex) {
         Matcher matcher = patternNumber.matcher(regex);
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     public void displayAllComputer() {
@@ -44,9 +37,11 @@ public class ManagerComputer {
         }
     }
 
+    
+
     public Computer deleteComputer(int deleteNum) {
         Computer computer;
-        if (deleteNum > 0 && deleteNum < computers.size()) {
+        if (deleteNum > 0 && deleteNum <= computers.size()) {
             computer = computers.get(deleteNum - 1);
             computers.remove(computer);
             computerIOFile.writeToFile(PATH, computers);
@@ -68,8 +63,9 @@ public class ManagerComputer {
     public Computer addComputer() {
         int code;
         do {
-            System.out.println("Nhập số máy: ");
+            System.out.print("Nhập số máy: ");
             code = scanner.nextInt();
+            scanner.nextLine();
         } while (checkCode(code));
         Computer computer = new Computer(code);
         computers.add(computer);
@@ -80,7 +76,7 @@ public class ManagerComputer {
     public Computer updateComputer(int updateNumber) {
         Computer computer;
         if (updateNumber < 0 || updateNumber > computers.size()) {
-            return computer = null;
+            return null;
         } else {
             computer = computers.get(updateNumber - 1);
             System.out.println(computers);
@@ -91,6 +87,7 @@ public class ManagerComputer {
             do {
                 System.out.print("Nhập lại số máy: ");
                 updateCode = scanner.nextInt();
+                scanner.nextLine();
             } while (validateNumber(Integer.toString(updateCode)) || checkCode(updateCode));
             computer.setCode(updateCode);
 

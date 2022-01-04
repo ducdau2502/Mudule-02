@@ -1,8 +1,9 @@
 package main;
 
 import manager.ManagerComputer;
-import module.Account;
+import manager.ManagerService;
 import module.Computer;
+import module.Service;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -13,6 +14,7 @@ public class MainComputer {
     private static Pattern pattern;
     private static final String NUMBER_REGEX = "^(\\d+)$";
     ManagerComputer managerComputer = new ManagerComputer();
+    ManagerService managerService = new ManagerService();
 
     public MainComputer() {
         pattern = Pattern.compile(NUMBER_REGEX);
@@ -33,13 +35,14 @@ public class MainComputer {
                 System.out.println("3. Sửa thông tin máy");
                 System.out.println("4. Xoá 1 máy khỏi danh sách");
                 System.out.println("5. Thêm dịch vụ");
-                System.out.println("6. Chỉnh sửa tính tiền theo giờ");
-                System.out.println("7. Tính tiền");
-                System.out.println("8. Doanh thu");
+                System.out.println("6. Hiển thị tất cả dịch vụ");
+                System.out.println("7. Chỉnh sửa tính tiền theo giờ");
+                System.out.println("8. Tính tiền");
+                System.out.println("9. Doanh thu");
                 System.out.print("Nhập vào lựa chọn của bạn: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
-            } while (validateNumber(Integer.toString(choice)) || choice < 0 || choice > 8);
+            } while (validateNumber(Integer.toString(choice)) || choice < 0 || choice > 9);
 
             switch (choice) {
                 case 1:
@@ -54,18 +57,29 @@ public class MainComputer {
                     }
                     break;
                 case 3:
+                    managerComputer.displayAllComputer();
                     updateComputer();
                     break;
                 case 4:
+                    managerComputer.displayAllComputer();
                     deleteComputer();
                     break;
                 case 5:
+                    Service service = managerService.addService();
+                    if (service != null) {
+                        System.out.println("Thêm " + service.getName() + " thành công");
+                    } else {
+                        System.out.println("Thêm thất bại");
+                    }
                     break;
                 case 6:
+                    managerService.displayAllServices();
                     break;
                 case 7:
                     break;
                 case 8:
+                    break;
+                case 9:
                     break;
             }
         } while (choice != 0);
@@ -88,7 +102,7 @@ public class MainComputer {
         if (choice1 == 1) {
             Computer computer = managerComputer.deleteComputer(deleteNumber);
             if (computer != null) {
-                System.out.println("Xoá máy " + computer.getStatus() + " thành công");
+                System.out.println("Xoá máy " + computer.getCode() + " thành công");
             } else {
                 System.out.println("Xoá máy thất bại");
             }

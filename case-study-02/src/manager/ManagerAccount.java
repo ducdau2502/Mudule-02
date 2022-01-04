@@ -64,7 +64,7 @@ public class ManagerAccount {
     public Account updateAccount(int updateNumber) {
         Account account;
         if (updateNumber < 0 || updateNumber > accounts.size()) {
-            return account = null;
+            return null;
         } else {
             account = accounts.get(updateNumber - 1);
             System.out.println(account);

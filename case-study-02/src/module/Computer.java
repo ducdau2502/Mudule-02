@@ -22,9 +22,9 @@ public class Computer implements Serializable {
 
     public String getStatus(){
         if (isStatus()) {
-            return "Offline";
-        }else {
             return "Online";
+        }else {
+            return "Offline";
         }
     }
 
@@ -58,6 +58,6 @@ public class Computer implements Serializable {
     public String toString() {
         return "Máy " +
                 "số = " + code +
-                ", trang thái = " + getStatus();
+                ", trạng thái = " + getStatus();
     }
 }

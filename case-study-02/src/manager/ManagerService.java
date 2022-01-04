@@ -1,7 +1,6 @@
 package manager;
 
 import IOfiles.IOFile;
-import module.Computer;
 import module.Service;
 
 import java.util.ArrayList;
@@ -15,8 +14,8 @@ public class ManagerService {
     private final ArrayList<Service> services;
     private static Pattern patternInput;
     private static Pattern patternNumber;
-    private static final String REGEX_INPUT = "^(?!\\d+$)\\w+$";
-    private static final String REGEX_NUMBER = "^(\\w+)$";
+    private static final String REGEX_INPUT = "^(?!\\d+$)(.*\\w+)(.*\\s)$";
+    private static final String REGEX_NUMBER = "^(\\d+)$";
 
     private static final String PATH = "src/database/services";
 
@@ -43,5 +42,23 @@ public class ManagerService {
                 System.out.println((i + 1) + ". " + services.get(i).toString());
             }
         }
+    }
+
+    public Service addService() {
+        String name;
+        double price;
+        do {
+            System.out.print("Nhập tên dịch vụ: ");
+            name = scanner.nextLine();
+        } while (validateInput(name));
+        do {
+            System.out.print("Nhập giá tiền của " + name + ": ");
+            price = scanner.nextDouble();
+            scanner.nextLine();
+        } while (validateNumber(Double.toString(price)));
+        Service service = new Service(name, price);
+        services.add(service);
+        serviceIOFile.writeToFile(PATH, services);
+        return service;
     }
 }
