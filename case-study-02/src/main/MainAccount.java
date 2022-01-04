@@ -42,9 +42,9 @@ public class MainAccount {
                     managerAccount.displayALlAccount();
                     break;
                 case 2:
-                    boolean createAccount = managerAccount.addAccount();
-                    if (createAccount) {
-                        System.out.println("Tạo tài khoản thành công");
+                    Account createAccount = managerAccount.addAccount();
+                    if (createAccount != null) {
+                        System.out.println("Tạo tài khoản " + createAccount.getUsername() + " thành công");
                     } else {
                         System.out.println("Tạo tài khoản thất bại");
                     }
@@ -78,12 +78,12 @@ public class MainAccount {
             scanner.nextLine();
         } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 1);
         if (choice1 == 1) {
-                boolean deleteAccount = managerAccount.deleteAccount(deleteNumber);
-                if (deleteAccount) {
-                    System.out.println("Xoá tài khoản thành công");
-                } else {
-                    System.out.println("Xoá tài khoản thất bại");
-                }
+            Account account = managerAccount.deleteAccount(deleteNumber);
+            if (account != null) {
+                System.out.println("Xoá tài khoản " + account.getUsername() + " thành công");
+            } else {
+                System.out.println("Xoá tài khoản thất bại");
+            }
         }
     }
 
@@ -95,8 +95,7 @@ public class MainAccount {
         } while (validateNumber(Integer.toString(updateNumber)));
         Account account = managerAccount.updateAccount(updateNumber);
         if (account != null) {
-            System.out.println("Sửa tài khoản thành công");
-            System.out.println(account);
+            System.out.println("Sửa tài khoản " + account.getUsername() + " thành công");
         } else {
             System.out.println("Sửa tài khoản thất bại");
         }

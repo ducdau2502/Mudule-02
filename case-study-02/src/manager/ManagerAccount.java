@@ -38,29 +38,27 @@ public class ManagerAccount {
         }
     }
 
-    public boolean deleteAccount(int deleteNumber) {
-        Account account = null;
+    public Account deleteAccount(int deleteNumber) {
+        Account account;
         if (deleteNumber < 0 || deleteNumber > accounts.size()) {
-            return false;
+            account = null;
         } else {
             account = accounts.get(deleteNumber - 1);
             accounts.remove(account);
             accountIOFile.writeToFile(PATH, accounts);
-            return true;
         }
+        return account;
     }
 
-    public boolean addAccount() {
+    public Account addAccount() {
         System.out.print("Nhập pass: ");
         String pass = scanner.nextLine();
         Account account = accountFactory.createAccount(pass);
         if (account != null) {
             accounts.add(account);
             accountIOFile.writeToFile(PATH, accounts);
-            return true;
-        } else {
-            return false;
         }
+        return account;
     }
 
     public Account updateAccount(int updateNumber) {
