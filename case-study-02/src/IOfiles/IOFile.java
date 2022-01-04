@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class IOFile<T> {
     public void writeToFile(String path, ArrayList<T> t) {
         try {
-            FileOutputStream fos = new FileOutputStream(path);
+            FileOutputStream fos = new FileOutputStream(path, true);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(t);
             oos.close();
@@ -16,17 +16,25 @@ public class IOFile<T> {
         }
     }
 
-    public  ArrayList<T> readFromFile(String path) {
+    public ArrayList<T> readFromFile(String path) {
         ArrayList<T> t = new ArrayList<>();
-
-        try {
-            FileInputStream fis = new FileInputStream(path);
-            ObjectInputStream ois = new java.io.ObjectInputStream(fis);
-            t = (ArrayList<T>) ois.readObject();
-            ois.close();
-            fis.close();
-        }catch (IOException | ClassNotFoundException ios) {
-            ios.printStackTrace();
+        File file = new File(path);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                FileInputStream fis = new FileInputStream(path);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                t = (ArrayList<T>) ois.readObject();
+                ois.close();
+                fis.close();
+            } catch (IOException | ClassNotFoundException ios) {
+                ios.printStackTrace();
+            }
         }
         return t;
     }
