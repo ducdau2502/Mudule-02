@@ -1,7 +1,6 @@
 package manager;
 
 import IOfiles.IOFile;
-import module.Account;
 import module.Computer;
 
 import java.util.ArrayList;
@@ -38,22 +37,6 @@ public class ManagerComputer {
         }
     }
 
-    public void displayOnlineComputer() {
-        for (Computer computer : computers) {
-            if (computer.getStatus().equals("Online")) {
-                System.out.println(computer);
-            }
-        }
-    }
-
-    public void displayOfflineComputer() {
-        for (Computer computer : computers) {
-            if (computer.getStatus().equals("Offline")) {
-                System.out.println(computer);
-            }
-        }
-    }
-
     public Computer deleteComputer(int deleteNum) {
         Computer computer;
         if (deleteNum > 0 && deleteNum <= computers.size()) {
@@ -84,6 +67,7 @@ public class ManagerComputer {
         } while (checkCode(code));
         Computer computer = new Computer(code);
         computers.add(computer);
+        changePrice(computers.get(0).getTimePrice());
         computerIOFile.writeToFile(PATH, computers);
         return computer;
     }
@@ -114,8 +98,90 @@ public class ManagerComputer {
 
     public void changePrice(double price) {
         for (Computer computer : computers) {
-            computer.setPrice(price);
+            computer.setTimePrice(price);
         }
     }
 
+    public boolean displayOnlineComputer() {
+        boolean checkNull = true;
+        for (int i = 0; i < computers.size(); i++) {
+            if (computers.get(i).getStatus().equals("Online")) {
+                checkNull = false;
+                System.out.println("máy " + computers.get(i).getCode() + " " + computers.get(i).getStatus());
+            }
+        }
+        return checkNull;
+    }
+
+    public void displayDetails() {
+        if (displayOnlineComputer()) {
+            System.out.println("Không có máy nào đang Online");
+        } else {
+            System.out.print("Nhập số máy muốn xem chi tiết ");
+            int index = (scanner.nextInt() - 1);
+
+            boolean flag = true;
+
+            for (int i = 0; i < computers.size(); i++) {
+                if (computers.indexOf(computers.get(i)) == index && computers.get(i).getStatus().equals("Online")) {
+                    flag = false;
+                    System.out.println(computers.get(i).toString());
+                }
+            }
+            if (flag) {
+                System.out.println("Sai dữ liệu đầu vào");
+            }
+        }
+    }
+
+    public boolean displayOfflineComputer() {
+        boolean checkNull = true;
+        for (int i = 0; i < computers.size(); i++) {
+            if (computers.get(i).getStatus().equals("Offline")) {
+                checkNull = false;
+                System.out.println("máy " + computers.get(i).getCode() + " " + computers.get(i).getStatus());
+            }
+        }
+
+        return checkNull;
+    }
+
+    public void turnOnComputer() {
+        if (displayOfflineComputer()) {
+            System.out.println("Không có mấy nào đang offline");
+        } else {
+            System.out.print("Nhập số máy muốn bật: ");
+            int index = (scanner.nextInt() - 1);
+
+            boolean flag = true;
+
+            for (int i = 0; i < computers.size(); i++) {
+                if (computers.indexOf(computers.get(i)) == index && computers.get(i).getStatus().equals("Offline")) {
+                    flag = false;
+                    int choice;
+                    do {
+                        System.out.println("Máy đang Offline. Bạn muốn bật hay không?");
+                        System.out.println("1. Bật");
+                        System.out.println("0. Không");
+                        System.out.print("Nhập lựa chọn: ");
+                        choice = scanner.nextInt();
+                        if (choice == 1) {
+                            computers.get(i).changeStatus();
+                            computers.get(i).setStartTime();
+                            computers.get(i).start();
+                            computerIOFile.writeToFile(PATH, computers);
+                            break;
+                        }
+                    } while (choice != 0);
+                }
+            }
+            if (flag) {
+                System.out.println("Sai dữ liệu đầu vào");
+            }
+        }
+    }
+
+    public void payment() {
+
+    }
 }

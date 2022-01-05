@@ -39,6 +39,7 @@ public class MainComputer {
                 System.out.println("7. Chỉnh sửa tính tiền theo giờ");
                 System.out.println("8. Tính tiền");
                 System.out.println("9. Doanh thu");
+                System.out.println("0. Quay lại");
                 System.out.print("Nhập vào lựa chọn của bạn: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
@@ -46,23 +47,7 @@ public class MainComputer {
 
             switch (choice) {
                 case 1:
-                    int choice1;
-                    do {
-                        do {
-                            System.out.println("1. Hiển thị toàn bộ máy online");
-                            System.out.println("2. Hiển thị toàn bộ máy offline");
-                            System.out.println("0. Quay lại");
-                            System.out.print("Nhập vào lựa chọn của bạn: ");
-                            choice1 = scanner.nextInt();
-                            scanner.nextLine();
-
-                        } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 2);
-                        if (choice1 == 1) {
-                            managerComputer.displayOnlineComputer();
-                        } else {
-                            managerComputer.displayOfflineComputer();
-                        }
-                    } while (choice1 != 0);
+                    displayComputer();
                     break;
                 case 2:
                     Computer computer = managerComputer.addComputer();
@@ -92,16 +77,55 @@ public class MainComputer {
                     managerService.displayAllServices();
                     break;
                 case 7:
-                    System.out.print("Nhập số tiền 1 giờ / máy: ");
+                    System.out.print("Nhập số tiền 1 giờ/máy: ");
                     double price = scanner.nextDouble();
                     managerComputer.changePrice(price);
                     break;
                 case 8:
+                    int choice1;
+                    do {
+                        do {
+                            System.out.println("1. Thanh toán");
+                            System.out.println("2. Thêm dịch vụ");
+                            System.out.println("0. Quay lại");
+                            System.out.print("Nhập vào lựa chọn của bạn: ");
+                            choice1 = scanner.nextInt();
+                            scanner.nextLine();
+
+                        } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 2);
+                        if (choice1 == 1) {
+                            managerComputer.displayOnlineComputer();
+                        } else {
+                            managerComputer.displayOfflineComputer();
+                        }
+                    } while (choice1 != 0);
                     break;
                 case 9:
                     break;
             }
         } while (choice != 0);
+    }
+
+    private void displayComputer() {
+        int choice1;
+        do {
+            do {
+                System.out.println("1. Hiển thị toàn bộ máy online");
+                System.out.println("2. Hiển thị toàn bộ máy offline");
+                System.out.println("0. Quay lại");
+                System.out.print("Nhập vào lựa chọn của bạn: ");
+                choice1 = scanner.nextInt();
+                scanner.nextLine();
+
+            } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 2);
+            if (choice1 == 1) {
+//                managerComputer.displayOnlineComputer();
+                managerComputer.displayDetails();
+            } else if (choice1 == 2) {
+//                managerComputer.displayOfflineComputer();
+                managerComputer.turnOnComputer();
+            }
+        } while (choice1 != 0);
     }
 
     private void deleteComputer() {

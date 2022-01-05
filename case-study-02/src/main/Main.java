@@ -40,8 +40,10 @@ public class Main {
                     case 2:
                         mainComputer.runMainComputer();
                         break;
+                    case 0:
+                        System.exit(0);
                 }
-            } while (choice != 0);
+            } while (true);
         } else {
             System.out.println("Đăng nhập thất bại");
         }
@@ -64,5 +66,7 @@ public class Main {
         }
         return false;
     }
+
+
 }
 

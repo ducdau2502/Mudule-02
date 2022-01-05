@@ -14,7 +14,7 @@ public class ManagerService {
     private final ArrayList<Service> services;
     private static Pattern patternInput;
     private static Pattern patternNumber;
-    private static final String REGEX_INPUT = "^(?!\\d+$)(.*\\w+)(.*\\s)$";
+    private static final String REGEX_INPUT = "^([a-zA-Z]{1})(.*\\w+)$";
     private static final String REGEX_NUMBER = "^(\\d+)$";
 
     private static final String PATH = "src/database/services";

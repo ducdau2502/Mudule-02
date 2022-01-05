@@ -32,7 +32,7 @@ public class Service implements Serializable {
 
     @Override
     public String toString() {
-        return "tên = '" + name + '\'' +
-                ", giá = " + price;
+        return "tên = '" + getName() + '\'' +
+                ", giá = " + getPrice();
     }
 }
