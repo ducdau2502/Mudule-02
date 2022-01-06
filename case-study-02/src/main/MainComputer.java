@@ -24,18 +24,18 @@ public class MainComputer {
     public void runMainComputer() {
         int choice;
         do {
-                System.out.println();
-                System.out.println("\t\t\t\t\t\t\t##===============================QUẢN LÝ PHÒNG MÁY===============================##");
-                System.out.println("\t\t\t\t\t\t\t|| 1. Hiển thị danh sách máy          || 7. Chỉnh sửa tính tiền theo giờ         ||");
-                System.out.println("\t\t\t\t\t\t\t|| 2. Thêm 1 máy mới                  || 8. Tính tiền                            ||");
-                System.out.println("\t\t\t\t\t\t\t|| 3. Sửa đổi thông tin máy           || 9. Doanh thu                            ||");
-                System.out.println("\t\t\t\t\t\t\t|| 4. Xóa 1 máy                       ||                                         ||");
-                System.out.println("\t\t\t\t\t\t\t|| 5. Thêm dịch vụ                    ||                                         ||");
-                System.out.println("\t\t\t\t\t\t\t|| 6. Hiển thị tất cả dịch vụ         || 0. Quay lại                             ||");
-                System.out.println("\t\t\t\t\t\t\t##=====================================*****=====================================##");
-                System.out.print("\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
-                choice = scanner.nextInt();
-                scanner.nextLine();
+            System.out.println();
+            System.out.println("\t\t\t\t\t\t\t##===============================QUẢN LÝ PHÒNG MÁY===============================##");
+            System.out.println("\t\t\t\t\t\t\t|| 1. Hiển thị danh sách máy          || 7. Chỉnh sửa tính tiền theo giờ         ||");
+            System.out.println("\t\t\t\t\t\t\t|| 2. Thêm 1 máy mới                  || 8. Tính tiền                            ||");
+            System.out.println("\t\t\t\t\t\t\t|| 3. Sửa đổi thông tin máy           || 9. Doanh thu theo thời gian             ||");
+            System.out.println("\t\t\t\t\t\t\t|| 4. Xóa 1 máy                       || 10. Tổng doanh thu                      ||");
+            System.out.println("\t\t\t\t\t\t\t|| 5. Thêm dịch vụ                    ||                                         ||");
+            System.out.println("\t\t\t\t\t\t\t|| 6. Hiển thị tất cả dịch vụ         || 0. Quay lại                             ||");
+            System.out.println("\t\t\t\t\t\t\t##=====================================*****=====================================##");
+            System.out.print("\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -76,12 +76,12 @@ public class MainComputer {
                 case 8:
                     int choice1;
                     do {
-                            System.out.println("1. Thanh toán");
-                            System.out.println("2. Thêm dịch vụ");
-                            System.out.println("0. Quay lại");
-                            System.out.print("Nhập vào lựa chọn của bạn: ");
-                            choice1 = scanner.nextInt();
-                            scanner.nextLine();
+                        System.out.println("1. Thanh toán");
+                        System.out.println("2. Thêm dịch vụ");
+                        System.out.println("0. Quay lại");
+                        System.out.print("Nhập vào lựa chọn của bạn: ");
+                        choice1 = scanner.nextInt();
+                        scanner.nextLine();
 
                         if (choice1 == 1) {
                             managerComputer.payment();
@@ -95,11 +95,15 @@ public class MainComputer {
                             } catch (Exception e) {
                                 System.out.println("Lỗi dữ liệu đầu vào");
                             }
-                            }
+                        }
 
                     } while (choice1 != 0);
                     break;
                 case 9:
+                    break;
+                case 10:
+                    double totalTurnover = managerComputer.totalTurnover();
+                    System.out.println("Tổng doang thu: " + totalTurnover + " VND");
                     break;
             }
         } while (choice != 0);
@@ -108,12 +112,12 @@ public class MainComputer {
     private void displayComputer() {
         int choice1;
         do {
-                System.out.println("1. Hiển thị toàn bộ máy online");
-                System.out.println("2. Hiển thị toàn bộ máy offline");
-                System.out.println("0. Quay lại");
-                System.out.print("Nhập vào lựa chọn của bạn: ");
-                choice1 = scanner.nextInt();
-                scanner.nextLine();
+            System.out.println("1. Hiển thị toàn bộ máy online");
+            System.out.println("2. Hiển thị toàn bộ máy offline");
+            System.out.println("0. Quay lại");
+            System.out.print("Nhập vào lựa chọn của bạn: ");
+            choice1 = scanner.nextInt();
+            scanner.nextLine();
             if (choice1 == 1) {
                 managerComputer.displayDetails();
             } else if (choice1 == 2) {
@@ -124,14 +128,14 @@ public class MainComputer {
 
     private void deleteComputer() {
         int deleteNumber;
-            System.out.print("Nhập vào số thứ tự của máy: ");
-            deleteNumber = scanner.nextInt();
+        System.out.print("Nhập vào số thứ tự của máy: ");
+        deleteNumber = scanner.nextInt();
         int choice1;
-            System.out.println("1. Xác nhận xoá");
-            System.out.println("0. Không xoá");
-            System.out.print("Nhập vào lựa chọn của bạn: ");
-            choice1 = scanner.nextInt();
-            scanner.nextLine();
+        System.out.println("1. Xác nhận xoá");
+        System.out.println("0. Không xoá");
+        System.out.print("Nhập vào lựa chọn của bạn: ");
+        choice1 = scanner.nextInt();
+        scanner.nextLine();
         if (choice1 == 1) {
             Computer computer = managerComputer.deleteComputer(deleteNumber);
             if (computer != null) {
@@ -144,8 +148,8 @@ public class MainComputer {
 
     private void updateComputer() {
         int updateNumber;
-            System.out.print("Nhập vào số thứ tự của máy: ");
-            updateNumber = scanner.nextInt();
+        System.out.print("Nhập vào số thứ tự của máy: ");
+        updateNumber = scanner.nextInt();
         Computer computer = managerComputer.updateComputer(updateNumber);
         if (computer != null) {
             System.out.println("Sửa máy " + computer.getCode() + " thành công");

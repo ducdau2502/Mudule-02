@@ -2,19 +2,26 @@ package manager;
 
 import IOfiles.IOFile;
 import module.Computer;
+import module.Turnover;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ManagerComputer extends Thread {
     private final Scanner scanner = new Scanner(System.in);
     private final IOFile<Computer> computerIOFile = new IOFile<>();
     private final ArrayList<Computer> computers;
+    private final ArrayList<Turnover> turnovers;
 
     private static final String PATH = "src/database/computers";
+    private static final String PATH_TURNOVER = "src/database/turnovers";
 
     public ManagerComputer() {
         this.computers = computerIOFile.readFromFile(PATH);
+        this.turnovers = readFileCSV(PATH_TURNOVER);
+
     }
 
     public void displayAllComputer() {
@@ -52,9 +59,9 @@ public class ManagerComputer extends Thread {
 
     public Computer addComputer() {
         int code;
-            System.out.print("Nhập số máy: ");
-            code = scanner.nextInt();
-            scanner.nextLine();
+        System.out.print("Nhập số máy: ");
+        code = scanner.nextInt();
+        scanner.nextLine();
         Computer computer = new Computer(code);
         computers.add(computer);
         changePrice(computers.get(0).getTimePrice());
@@ -73,9 +80,9 @@ public class ManagerComputer extends Thread {
         }
         if (computer != null) {
             int updateCode;
-                System.out.print("Nhập lại số máy: ");
-                updateCode = scanner.nextInt();
-                scanner.nextLine();
+            System.out.print("Nhập lại số máy: ");
+            updateCode = scanner.nextInt();
+            scanner.nextLine();
             computer.setCode(updateCode);
             computers.set(updateNumber - 1, computer);
         }
@@ -193,11 +200,17 @@ public class ManagerComputer extends Thread {
                         choice = scanner.nextInt();
                         if (choice == 1) {
                             computers.get(i).changeStatus();
+                            Date date = new Date((long) computers.get(i).getEndTime());
+                            int day = date.getDate();
+                            int month = date.getMonth() + 1;
+                            int year = date.getYear() + 1900;
+                            turnovers.add(new Turnover(day, month, year, totalPrice));
                             computers.get(i).setEndTime(0);
                             computers.get(i).setStartTime(0);
-                            computers.get(i).setServicePrice(0);
+                            computers.get(i).resetServicePrice();
                             System.out.println("Đã thanh toán: " + totalPrice + " VND");
-//                            ghi file doanh thi
+
+                            writeFileCSV(turnovers, PATH_TURNOVER);
                             computerIOFile.writeToFile(PATH, computers);
                             break;
                         }
@@ -228,6 +241,60 @@ public class ManagerComputer extends Thread {
                 System.out.println("Sai dữ liệu đầu vào");
             }
         }
+    }
+
+    public double totalTurnover() {
+        double sum = 0;
+        for(Turnover turnover : turnovers) {
+            sum += turnover.getTurnover();
+        }
+
+        return sum;
+    }
+
+    private void writeFileCSV(ArrayList<Turnover> turnovers, String path) {
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
+            for (Turnover turnover : turnovers) {
+                bufferedWriter.append(String.valueOf(turnover.getDay()));
+                bufferedWriter.append(",");
+                bufferedWriter.append(String.valueOf(turnover.getMonth()));
+                bufferedWriter.append(",");
+                bufferedWriter.append(String.valueOf(turnover.getYear()));
+                bufferedWriter.append(",");
+                bufferedWriter.append(String.valueOf(turnover.getTurnover()));
+                bufferedWriter.append("\n");
+            }
+
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private ArrayList<Turnover> readFileCSV(String path) {
+        ArrayList<Turnover> turnovers = new ArrayList<>();
+        File file = new File(path);
+
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            } else {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] strings = line.split(",");
+                    int day = Integer.parseInt(strings[0]);
+                    int month = Integer.parseInt(strings[1]);
+                    int year = Integer.parseInt(strings[2]);
+                    double turnover = Double.parseDouble(strings[3]);
+                    turnovers.add(new Turnover(day, month, year, turnover));
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return turnovers;
     }
 
 

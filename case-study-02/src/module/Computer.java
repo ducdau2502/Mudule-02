@@ -73,6 +73,10 @@ public class Computer implements Serializable {
         this.servicePrice += servicePrice;
     }
 
+    public void resetServicePrice() {
+        this.servicePrice = 0;
+    }
+
     public double totalPrice() {
         return ((getTimePrice() * getTimeUsing()) + getServicePrice());
     }
