@@ -182,6 +182,63 @@ public class ManagerComputer {
     }
 
     public void payment() {
+        if (displayOnlineComputer()) {
+            System.out.println("Không có mấy nào đang online");
+        } else {
+            System.out.print("Nhập số máy muốn thanh toán: ");
+            int index = (scanner.nextInt() - 1);
 
+            boolean checkNull = true;
+
+            for (int i = 0; i < computers.size(); i++) {
+                if (computers.indexOf(computers.get(i)) == index && computers.get(i).getStatus().equals("Online")) {
+                    checkNull = false;
+                    int choice;
+                    do {
+                        double totalPrice = computers.get(i).totalPrice();
+                        System.out.println("Bạn có muốn hay không?");
+                        System.out.println("Tổng tiền: " + totalPrice + " VND");
+                        System.out.println("1. Thanh toán");
+                        System.out.println("0. Huỷ");
+                        System.out.print("Nhập lựa chọn: ");
+                        choice = scanner.nextInt();
+                        if (choice == 1) {
+                            computers.get(i).changeStatus();
+                            computers.get(i).setEndTime();
+                            System.out.println("Đã thanh toán: " + totalPrice + " VND");
+//                            ghi file doanh thi
+                            computerIOFile.writeToFile(PATH, computers);
+                            break;
+                        }
+                    } while (choice != 0);
+                }
+            }
+            if (checkNull) {
+                System.out.println("Sai dữ liệu đầu vào");
+            }
+        }
     }
+
+    public void addServiceToComputer(double price) {
+        if (displayOnlineComputer()) {
+            System.out.println("Không có mấy nào đang online");
+        } else {
+            System.out.print("Nhập số máy muốn thêm dịch vụ: ");
+            int indexComputer = (scanner.nextInt() - 1);
+
+            boolean checkNull = true;
+            for (int i = 0; i < computers.size(); i++) {
+                if (computers.indexOf(computers.get(i)) == indexComputer && computers.get(i).getStatus().equals("Online")) {
+                    checkNull = false;
+                    computers.get(i).setServicePrice(price);
+                }
+            }
+            if (checkNull) {
+                System.out.println("Sai dữ liệu đầu vào");
+            }
+        }
+    }
+
+
+
 }

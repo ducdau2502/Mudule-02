@@ -2,6 +2,7 @@ package module;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Computer extends Thread implements Serializable {
     private int code;
@@ -27,10 +28,10 @@ public class Computer extends Thread implements Serializable {
         return status;
     }
 
-    public String getStatus(){
+    public String getStatus() {
         if (isStatus()) {
             return "Online";
-        }else {
+        } else {
             return "Offline";
         }
     }
@@ -72,7 +73,7 @@ public class Computer extends Thread implements Serializable {
     }
 
     public void setServicePrice(double servicePrice) {
-        this.servicePrice = servicePrice;
+        this.servicePrice += servicePrice;
     }
 
     public double totalPrice() {

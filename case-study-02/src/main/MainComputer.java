@@ -1,15 +1,20 @@
 package main;
 
+import IOfiles.IOFile;
 import manager.ManagerComputer;
 import manager.ManagerService;
 import module.Computer;
 import module.Service;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainComputer {
+    private final IOFile<Service> serviceIOFile = new IOFile<>();
+    private ArrayList<Service> services = serviceIOFile.readFromFile(PATH_Services);
+    private static final String PATH_Services = "src/database/services";
     private final Scanner scanner = new Scanner(System.in);
     private static Pattern pattern;
     private static final String NUMBER_REGEX = "^(\\d+)$";
@@ -94,9 +99,13 @@ public class MainComputer {
 
                         } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 2);
                         if (choice1 == 1) {
-                            managerComputer.displayOnlineComputer();
-                        } else {
-                            managerComputer.displayOfflineComputer();
+                            managerComputer.payment();
+                        } else if (choice1 == 2) {
+                            managerService.displayAllServices();
+                            System.out.print("Chọn dịch vụ muốn thêm: ");
+                            int indexService = (scanner.nextInt() - 1);
+                            double priceService = services.get(indexService).getPrice();
+                            managerComputer.addServiceToComputer(priceService);
                         }
                     } while (choice1 != 0);
                     break;
@@ -165,4 +174,6 @@ public class MainComputer {
             System.out.println("Sửa máy thất bại");
         }
     }
+
+
 }
