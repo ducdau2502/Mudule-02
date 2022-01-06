@@ -15,23 +15,27 @@ public class Main {
         MainComputer mainComputer = new MainComputer();
         IOFile<Account> accountIOFile = new IOFile<>();
         ArrayList<Account> accounts = accountIOFile.readFromFile(PATH_ACCOUNT);
-        System.out.println("Mời đăng nhập để vào mục quản lý");
-        System.out.print("Nhập tài khoản: ");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t------PHẦN MỀM QUẢN LÝ PHÒNG NET------");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----------Hệ thống-----------\n");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t---Mời đăng nhập để vào mục quản lý---\n");
+        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\tNhập tài khoản: ");
         String username = scanner.nextLine();
-        System.out.print("Nhập mật khẩu: ");
+        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\tNhập mật khẩu: ");
         String password = scanner.nextLine();
 
         boolean checkLogin = checkUsername(accounts, username) && checkPassword(accounts, password);
 
         if (checkLogin) {
-            System.out.println("Đăng nhập thành công");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----Đăng nhập thành công-----\n");
             int choice;
             do {
-                System.out.println("QUẢN LÝ CYBER GAMING");
-                System.out.println("1. Quản lý tài khoản");
-                System.out.println("2. Quản lý phòng máy");
-                System.out.println("0. Thoát hệ thống");
-                System.out.print("NHập vào lựa chọn của bạn: ");
+
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t********** CYBER GAME ***********");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     1. Quản lý tài khoản      *");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     2. Quản lý phòng máy      *");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     0. Thoát hệ thống         *");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*********************************");
+                System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
                 choice = scanner.nextInt();
                 switch (choice) {
                     case 1:

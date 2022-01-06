@@ -32,8 +32,9 @@ public class ManagerAccount {
         if (accounts.isEmpty()) {
             System.out.println("Không có tài khoản quản lý");
         } else {
+            System.out.printf("%-15s%-20S%S","No.", "USERNAME", "PASSWORD\n");
             for (int i = 0; i < accounts.size(); i++) {
-                System.out.println((i + 1) + ". " + accounts.get(i).toString());
+                System.out.printf("%-15s%-20s%s\n",(i + 1), accounts.get(i).getUsername(), accounts.get(i).getPassword());
             }
         }
     }

@@ -26,13 +26,15 @@ public class MainAccount {
         int choice;
         do {
             do {
-                System.out.println("QUẢN LÝ TÀI KHOẢN");
-                System.out.println("1. Hiển thị toàn bộ tài khoản quản lý");
-                System.out.println("2. Thêm tài khoản quản lý");
-                System.out.println("3. Sửa thông tin tài khoản quản lý");
-                System.out.println("4. Xoá tài khoản quản lý");
-                System.out.println("0. Quay lại");
-                System.out.print("Nhập vào lựa chọn của bạn: ");
+                System.out.println();
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t##==================QUẢN LÝ TÀI KHOẢN==================##");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    1. Hiển thị toàn bộ tài khoản quản lý            ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    2. Thêm tài khoản quản lý                        ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    3. Sửa thông tin tài khoản quản lý               ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    4. Xoá tài khoản quản lý                         ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    0. Quay lại                                      ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t##=======================*****=========================##");
+                System.out.print("\t\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
             } while (validateNumber(Integer.toString(choice)) || choice < 0 || choice > 4);

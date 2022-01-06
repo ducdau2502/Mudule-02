@@ -1,17 +1,14 @@
 package module;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class Computer extends Thread implements Serializable {
+public class Computer implements Serializable {
     private int code;
     private boolean status;
     private double timePrice;
-    private double timeUsing;
     private double servicePrice;
-    private LocalDate startTime;
-    private LocalDate endTime;
+    private double startTime;
+    private double endTime;
 
     public Computer() {
     }
@@ -20,7 +17,6 @@ public class Computer extends Thread implements Serializable {
         this.code = code;
         this.status = false;
         this.timePrice = 15000;
-        this.timeUsing = 0;
         this.servicePrice = 0;
     }
 
@@ -61,11 +57,12 @@ public class Computer extends Thread implements Serializable {
     }
 
     public double getTimeUsing() {
-        return timeUsing;
-    }
-
-    public void setTimeUsing(double timeUsing) {
-        this.timeUsing = timeUsing;
+        if (isStatus()) {
+            setEndTime(System.currentTimeMillis());
+            return (getEndTime() - getStartTime())/20000;
+        } else {
+            return 0;
+        }
     }
 
     public double getServicePrice() {
@@ -80,20 +77,20 @@ public class Computer extends Thread implements Serializable {
         return ((getTimePrice() * getTimeUsing()) + getServicePrice());
     }
 
-    public LocalDate getStartTime() {
+    public double getStartTime() {
         return startTime;
     }
 
-    public void setStartTime() {
-        this.startTime = LocalDate.now();
+    public void setStartTime(double time) {
+        this.startTime = time;
     }
 
-    public LocalDate getEndTime() {
+    public double getEndTime() {
         return endTime;
     }
 
-    public void setEndTime() {
-        this.endTime = LocalDate.now();
+    public void setEndTime(double time) {
+        this.endTime = time;
     }
 
     @Override
@@ -107,15 +104,4 @@ public class Computer extends Thread implements Serializable {
                 ", tổng tiền = " + totalPrice();
     }
 
-    @Override
-    public void run() {
-        while (status) {
-            try {
-                Thread.sleep(5000);
-                this.timeUsing++;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

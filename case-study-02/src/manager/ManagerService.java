@@ -14,7 +14,7 @@ public class ManagerService {
     private final ArrayList<Service> services;
     private static Pattern patternInput;
     private static Pattern patternNumber;
-    private static final String REGEX_INPUT = "^([a-zA-Z]{1})(.*\\w+)$";
+    private static final String REGEX_INPUT = "^([a-zA-Z])(.*\\w+)$";
     private static final String REGEX_NUMBER = "^(\\d+)$";
 
     private static final String PATH = "src/database/services";
@@ -38,8 +38,10 @@ public class ManagerService {
         if (services.isEmpty()) {
             System.out.println("Không có dịch vụ nào");
         } else {
+            System.out.println();
+            System.out.printf("%-10s%-20S%S\n", "No.", "Tên", "giá");
             for (int i = 0; i < services.size(); i++) {
-                System.out.println((i + 1) + ". " + services.get(i).toString());
+                System.out.printf("%-10s%-20S%.2f\n", (i + 1), services.get(i).getName(), services.get(i).getPrice());
             }
         }
     }

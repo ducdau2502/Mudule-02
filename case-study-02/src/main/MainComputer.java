@@ -34,18 +34,16 @@ public class MainComputer {
         int choice;
         do {
             do {
-                System.out.println("QUẢN LÝ PHÒNG MÁY");
-                System.out.println("1. Hiển thị toàn bộ máy trong quán");
-                System.out.println("2. Thêm 1 máy vào danh sách");
-                System.out.println("3. Sửa thông tin máy");
-                System.out.println("4. Xoá 1 máy khỏi danh sách");
-                System.out.println("5. Thêm dịch vụ");
-                System.out.println("6. Hiển thị tất cả dịch vụ");
-                System.out.println("7. Chỉnh sửa tính tiền theo giờ");
-                System.out.println("8. Tính tiền");
-                System.out.println("9. Doanh thu");
-                System.out.println("0. Quay lại");
-                System.out.print("Nhập vào lựa chọn của bạn: ");
+                System.out.println();
+                System.out.println("\t\t\t\t\t\t\t##===============================QUẢN LÝ PHÒNG MÁY===============================##");
+                System.out.println("\t\t\t\t\t\t\t|| 1. Hiển thị danh sách máy          || 7. Chỉnh sửa tính tiền theo giờ         ||");
+                System.out.println("\t\t\t\t\t\t\t|| 2. Thêm 1 máy mới                  || 8. Tính tiền                            ||");
+                System.out.println("\t\t\t\t\t\t\t|| 3. Sửa đổi thông tin máy           || 9. Doanh thu                            ||");
+                System.out.println("\t\t\t\t\t\t\t|| 4. Xóa 1 máy                       ||                                         ||");
+                System.out.println("\t\t\t\t\t\t\t|| 5. Thêm dịch vụ                    ||                                         ||");
+                System.out.println("\t\t\t\t\t\t\t|| 6. Hiển thị tất cả dịch vụ         || 0. Quay lại                             ||");
+                System.out.println("\t\t\t\t\t\t\t##=====================================*****=====================================##");
+                System.out.print("\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
             } while (validateNumber(Integer.toString(choice)) || choice < 0 || choice > 9);

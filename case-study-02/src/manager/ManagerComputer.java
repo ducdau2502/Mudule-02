@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ManagerComputer {
+public class ManagerComputer extends Thread {
     private final Scanner scanner = new Scanner(System.in);
     private final IOFile<Computer> computerIOFile = new IOFile<>();
     private final ArrayList<Computer> computers;
@@ -31,8 +31,10 @@ public class ManagerComputer {
         if (computers.isEmpty()) {
             System.out.println("Không có máy quản lý");
         } else {
+            System.out.println();
+            System.out.printf("%-10s%-10S%-15S%-15S%-15S%-15S%S\n", "No.", "Máy", "trạng thái", "giá/giờ", "giờ sử dụng", "tiền dịch vụ", "tổng tiền");
             for (int i = 0; i < computers.size(); i++) {
-                System.out.println((i + 1) + ". " + computers.get(i).toString());
+                System.out.printf("%-10d%-10d%-15s%-15.2f%-15.2f%-15.2f%.2f\n", (i + 1), computers.get(i).getCode(), computers.get(i).getStatus(), computers.get(i).getTimePrice(), computers.get(i).getTimeUsing(), computers.get(i).getServicePrice(), computers.get(i).totalPrice());
             }
         }
     }
@@ -74,13 +76,13 @@ public class ManagerComputer {
 
     public Computer updateComputer(int updateNumber) {
         Computer computer;
-        if (updateNumber < 0 || updateNumber > computers.size()) {
+        if (updateNumber <= 0 || updateNumber > computers.size()) {
             return null;
         } else {
             computer = computers.get(updateNumber - 1);
-            System.out.println(computers);
+            System.out.printf("%-10S%-15S%-15S%-15S%-15S%S\n", "Máy", "trạng thái", "giá/giờ", "giờ sử dụng", "tiền dịch vụ", "tổng tiền");
+            System.out.printf("%-10d%-15s%-15.2f%-15.2f%-15.2f%.2f\n", computer.getCode(), computer.getStatus(), computer.getTimePrice(), computer.getTimeUsing(), computer.getServicePrice(), computer.totalPrice());
         }
-
         if (computer != null) {
             int updateCode;
             do {
@@ -89,7 +91,6 @@ public class ManagerComputer {
                 scanner.nextLine();
             } while (validateNumber(Integer.toString(updateCode)) || checkCode(updateCode));
             computer.setCode(updateCode);
-
             computers.set(updateNumber - 1, computer);
         }
         computerIOFile.writeToFile(PATH, computers);
@@ -104,10 +105,12 @@ public class ManagerComputer {
 
     public boolean displayOnlineComputer() {
         boolean checkNull = true;
-        for (int i = 0; i < computers.size(); i++) {
-            if (computers.get(i).getStatus().equals("Online")) {
+        System.out.println();
+        System.out.printf("%-10S%S\n", "Máy", "trạng thái");
+        for (Computer computer : computers) {
+            if (computer.getStatus().equals("Online")) {
                 checkNull = false;
-                System.out.println("máy " + computers.get(i).getCode() + " " + computers.get(i).getStatus());
+                System.out.printf("%-10s%s\n", computer.getCode(), computer.getStatus());
             }
         }
         return checkNull;
@@ -119,13 +122,13 @@ public class ManagerComputer {
         } else {
             System.out.print("Nhập số máy muốn xem chi tiết ");
             int index = (scanner.nextInt() - 1);
-
             boolean flag = true;
-
+            System.out.println();
+            System.out.printf("%-10S%-15S%-15S%-15S%-15S%S\n", "Máy", "trạng thái", "giá/giờ", "giờ sử dụng", "tiền dịch vụ", "tổng tiền");
             for (int i = 0; i < computers.size(); i++) {
                 if (computers.indexOf(computers.get(i)) == index && computers.get(i).getStatus().equals("Online")) {
                     flag = false;
-                    System.out.println(computers.get(i).toString());
+                    System.out.printf("%-10d%-15s%-15.2f%-15.2f%-15.2f%.2f\n", computers.get(i).getCode(), computers.get(i).getStatus(), computers.get(i).getTimePrice(), computers.get(i).getTimeUsing(), computers.get(i).getServicePrice(), computers.get(i).totalPrice());
                 }
             }
             if (flag) {
@@ -136,13 +139,14 @@ public class ManagerComputer {
 
     public boolean displayOfflineComputer() {
         boolean checkNull = true;
-        for (int i = 0; i < computers.size(); i++) {
-            if (computers.get(i).getStatus().equals("Offline")) {
+        System.out.println();
+        System.out.printf("%-10S%S\n", "Máy", "trạng thái");
+        for (Computer computer : computers) {
+            if (computer.getStatus().equals("Offline")) {
                 checkNull = false;
-                System.out.println("máy " + computers.get(i).getCode() + " " + computers.get(i).getStatus());
+                System.out.printf("%-10s%s\n", computer.getCode(), computer.getStatus());
             }
         }
-
         return checkNull;
     }
 
@@ -160,15 +164,14 @@ public class ManagerComputer {
                     flag = false;
                     int choice;
                     do {
-                        System.out.println("Máy đang Offline. Bạn muốn bật hay không?");
+                        System.out.println("Máy " + computers.get(i).getCode() + " đang Offline. Bạn muốn bật hay không?");
                         System.out.println("1. Bật");
                         System.out.println("0. Không");
                         System.out.print("Nhập lựa chọn: ");
                         choice = scanner.nextInt();
                         if (choice == 1) {
                             computers.get(i).changeStatus();
-                            computers.get(i).setStartTime();
-                            computers.get(i).start();
+                            computers.get(i).setStartTime(System.currentTimeMillis());
                             computerIOFile.writeToFile(PATH, computers);
                             break;
                         }
@@ -204,7 +207,9 @@ public class ManagerComputer {
                         choice = scanner.nextInt();
                         if (choice == 1) {
                             computers.get(i).changeStatus();
-                            computers.get(i).setEndTime();
+                            computers.get(i).setEndTime(0);
+                            computers.get(i).setStartTime(0);
+                            computers.get(i).setServicePrice(0);
                             System.out.println("Đã thanh toán: " + totalPrice + " VND");
 //                            ghi file doanh thi
                             computerIOFile.writeToFile(PATH, computers);
@@ -238,7 +243,6 @@ public class ManagerComputer {
             }
         }
     }
-
 
 
 }
