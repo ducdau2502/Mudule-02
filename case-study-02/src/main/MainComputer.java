@@ -8,32 +8,22 @@ import module.Service;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainComputer {
     private final IOFile<Service> serviceIOFile = new IOFile<>();
-    private ArrayList<Service> services = serviceIOFile.readFromFile(PATH_Services);
+    private final ArrayList<Service> services = serviceIOFile.readFromFile(PATH_Services);
     private static final String PATH_Services = "src/database/services";
     private final Scanner scanner = new Scanner(System.in);
-    private static Pattern pattern;
-    private static final String NUMBER_REGEX = "^(\\d+)$";
     ManagerComputer managerComputer = new ManagerComputer();
     ManagerService managerService = new ManagerService();
 
     public MainComputer() {
-        pattern = Pattern.compile(NUMBER_REGEX);
     }
 
-    private boolean validateNumber(String regex) {
-        Matcher matcher = pattern.matcher(regex);
-        return !matcher.matches();
-    }
 
     public void runMainComputer() {
         int choice;
         do {
-            do {
                 System.out.println();
                 System.out.println("\t\t\t\t\t\t\t##===============================QUẢN LÝ PHÒNG MÁY===============================##");
                 System.out.println("\t\t\t\t\t\t\t|| 1. Hiển thị danh sách máy          || 7. Chỉnh sửa tính tiền theo giờ         ||");
@@ -46,7 +36,6 @@ public class MainComputer {
                 System.out.print("\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
-            } while (validateNumber(Integer.toString(choice)) || choice < 0 || choice > 9);
 
             switch (choice) {
                 case 1:
@@ -87,7 +76,6 @@ public class MainComputer {
                 case 8:
                     int choice1;
                     do {
-                        do {
                             System.out.println("1. Thanh toán");
                             System.out.println("2. Thêm dịch vụ");
                             System.out.println("0. Quay lại");
@@ -95,16 +83,20 @@ public class MainComputer {
                             choice1 = scanner.nextInt();
                             scanner.nextLine();
 
-                        } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 2);
                         if (choice1 == 1) {
                             managerComputer.payment();
                         } else if (choice1 == 2) {
-                            managerService.displayAllServices();
-                            System.out.print("Chọn dịch vụ muốn thêm: ");
-                            int indexService = (scanner.nextInt() - 1);
-                            double priceService = services.get(indexService).getPrice();
-                            managerComputer.addServiceToComputer(priceService);
-                        }
+                            try {
+                                managerService.displayAllServices();
+                                System.out.print("Chọn dịch vụ muốn thêm: ");
+                                int indexService = (scanner.nextInt() - 1);
+                                double priceService = services.get(indexService).getPrice();
+                                managerComputer.addServiceToComputer(priceService);
+                            } catch (Exception e) {
+                                System.out.println("Lỗi dữ liệu đầu vào");
+                            }
+                            }
+
                     } while (choice1 != 0);
                     break;
                 case 9:
@@ -116,20 +108,15 @@ public class MainComputer {
     private void displayComputer() {
         int choice1;
         do {
-            do {
                 System.out.println("1. Hiển thị toàn bộ máy online");
                 System.out.println("2. Hiển thị toàn bộ máy offline");
                 System.out.println("0. Quay lại");
                 System.out.print("Nhập vào lựa chọn của bạn: ");
                 choice1 = scanner.nextInt();
                 scanner.nextLine();
-
-            } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 2);
             if (choice1 == 1) {
-//                managerComputer.displayOnlineComputer();
                 managerComputer.displayDetails();
             } else if (choice1 == 2) {
-//                managerComputer.displayOfflineComputer();
                 managerComputer.turnOnComputer();
             }
         } while (choice1 != 0);
@@ -137,18 +124,14 @@ public class MainComputer {
 
     private void deleteComputer() {
         int deleteNumber;
-        do {
             System.out.print("Nhập vào số thứ tự của máy: ");
             deleteNumber = scanner.nextInt();
-        } while (validateNumber(Integer.toString(deleteNumber)));
         int choice1;
-        do {
             System.out.println("1. Xác nhận xoá");
             System.out.println("0. Không xoá");
             System.out.print("Nhập vào lựa chọn của bạn: ");
             choice1 = scanner.nextInt();
             scanner.nextLine();
-        } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 1);
         if (choice1 == 1) {
             Computer computer = managerComputer.deleteComputer(deleteNumber);
             if (computer != null) {
@@ -161,10 +144,8 @@ public class MainComputer {
 
     private void updateComputer() {
         int updateNumber;
-        do {
             System.out.print("Nhập vào số thứ tự của máy: ");
             updateNumber = scanner.nextInt();
-        } while (validateNumber(Integer.toString(updateNumber)));
         Computer computer = managerComputer.updateComputer(updateNumber);
         if (computer != null) {
             System.out.println("Sửa máy " + computer.getCode() + " thành công");

@@ -5,26 +5,16 @@ import module.Computer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ManagerComputer extends Thread {
     private final Scanner scanner = new Scanner(System.in);
     private final IOFile<Computer> computerIOFile = new IOFile<>();
     private final ArrayList<Computer> computers;
-    private static Pattern patternNumber;
-    private static final String REGEX_NUMBER = "^(\\d+)$";
 
     private static final String PATH = "src/database/computers";
 
     public ManagerComputer() {
-        patternNumber = Pattern.compile(REGEX_NUMBER);
         this.computers = computerIOFile.readFromFile(PATH);
-    }
-
-    private boolean validateNumber(String regex) {
-        Matcher matcher = patternNumber.matcher(regex);
-        return !matcher.matches();
     }
 
     public void displayAllComputer() {
@@ -62,11 +52,9 @@ public class ManagerComputer extends Thread {
 
     public Computer addComputer() {
         int code;
-        do {
             System.out.print("Nhập số máy: ");
             code = scanner.nextInt();
             scanner.nextLine();
-        } while (checkCode(code));
         Computer computer = new Computer(code);
         computers.add(computer);
         changePrice(computers.get(0).getTimePrice());
@@ -85,11 +73,9 @@ public class ManagerComputer extends Thread {
         }
         if (computer != null) {
             int updateCode;
-            do {
                 System.out.print("Nhập lại số máy: ");
                 updateCode = scanner.nextInt();
                 scanner.nextLine();
-            } while (validateNumber(Integer.toString(updateCode)) || checkCode(updateCode));
             computer.setCode(updateCode);
             computers.set(updateNumber - 1, computer);
         }

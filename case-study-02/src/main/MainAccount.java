@@ -27,14 +27,14 @@ public class MainAccount {
         do {
             do {
                 System.out.println();
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t##==================QUẢN LÝ TÀI KHOẢN==================##");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    1. Hiển thị toàn bộ tài khoản quản lý            ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    2. Thêm tài khoản quản lý                        ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    3. Sửa thông tin tài khoản quản lý               ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    4. Xoá tài khoản quản lý                         ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t||    0. Quay lại                                      ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t##=======================*****=========================##");
-                System.out.print("\t\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t##==================QUẢN LÝ TÀI KHOẢN==================##");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t||    1. Hiển thị toàn bộ tài khoản quản lý            ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t||    2. Thêm tài khoản quản lý                        ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t||    3. Sửa thông tin tài khoản quản lý               ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t||    4. Xoá tài khoản quản lý                         ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t||    0. Quay lại                                      ||");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t##=======================*****=========================##");
+                System.out.print("\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
             } while (validateNumber(Integer.toString(choice)) || choice < 0 || choice > 4);
