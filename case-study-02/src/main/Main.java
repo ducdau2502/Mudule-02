@@ -28,28 +28,32 @@ public class Main {
         if (checkLogin) {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----Đăng nhập thành công-----\n");
             int choice;
-            do {
-
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t********** CYBER GAME ***********");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     1. Quản lý tài khoản      *");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     2. Quản lý phòng máy      *");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     0. Thoát hệ thống         *");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*********************************");
-                System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
-                choice = scanner.nextInt();
-                switch (choice) {
-                    case 1:
-                        mainAccount.runMainAccount();
-                        break;
-                    case 2:
-                        mainComputer.runMainComputer();
-                        break;
-                    case 0:
-                        System.exit(0);
-                }
-            } while (true);
+                    do {
+                        System.out.println();
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t********** CYBER GAME ***********");
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     1. Quản lý tài khoản      *");
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     2. Quản lý phòng máy      *");
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*     0. Thoát hệ thống         *");
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t*********************************");
+                        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
+                        try {
+                            choice = Integer.parseInt(scanner.nextLine());
+                            switch (choice) {
+                                case 1:
+                                    mainAccount.runMainAccount();
+                                    break;
+                                case 2:
+                                    mainComputer.runMainComputer();
+                                    break;
+                                case 0:
+                                    System.exit(0);
+                            }
+                        } catch (Exception e) {
+                            System.err.println("\t\t\t\t\t\t\t\t\t\t\t\t\t--Có biết là phải nhập số không--");
+                        }
+                    } while (true);
         } else {
-            System.out.println("Đăng nhập thất bại");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----Đăng nhập thất bại-----\n");
         }
     }
 

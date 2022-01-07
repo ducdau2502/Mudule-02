@@ -3,12 +3,16 @@ package main;
 import IOfiles.IOFile;
 import manager.ManagerComputer;
 import manager.ManagerService;
+import module.Account;
 import module.Computer;
 import module.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainComputer {
     private final IOFile<Service> serviceIOFile = new IOFile<>();
@@ -24,76 +28,96 @@ public class MainComputer {
 
     public void runMainComputer() {
         int choice;
-        do {
-            System.out.println();
-            System.out.println("\t\t\t\t\t\t\t##===============================QUẢN LÝ PHÒNG MÁY===============================##");
-            System.out.println("\t\t\t\t\t\t\t|| 1. Hiển thị danh sách máy          || 7. Chỉnh sửa tính tiền theo giờ         ||");
-            System.out.println("\t\t\t\t\t\t\t|| 2. Thêm 1 máy mới                  || 8. Tính tiền                            ||");
-            System.out.println("\t\t\t\t\t\t\t|| 3. Sửa đổi thông tin máy           || 9. Doanh thu theo thời gian             ||");
-            System.out.println("\t\t\t\t\t\t\t|| 4. Xóa 1 máy                       || 10. Tổng doanh thu                      ||");
-            System.out.println("\t\t\t\t\t\t\t|| 5. Thêm dịch vụ                    ||                                         ||");
-            System.out.println("\t\t\t\t\t\t\t|| 6. Hiển thị tất cả dịch vụ         || 0. Quay lại                             ||");
-            System.out.println("\t\t\t\t\t\t\t##=====================================*****=====================================##");
-            System.out.print("\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
-                case 1:
-                    displayComputer();
-                    break;
-                case 2:
-                    Computer computer = managerComputer.addComputer();
-                    if (computer != null) {
-                        System.out.println("Tạo máy " + computer.getCode() + " thành công");
-                    } else {
-                        System.out.println("Tạo tài khoản thất bại");
+        boolean flag = true;
+        while (flag) {
+            try {
+                do {
+                    System.out.println();
+                    System.out.println("\t\t\t\t\t\t\t##===============================QUẢN LÝ PHÒNG MÁY===============================##");
+                    System.out.println("\t\t\t\t\t\t\t|| 1. Hiển thị danh sách máy          || 7. Chỉnh sửa tính tiền theo giờ         ||");
+                    System.out.println("\t\t\t\t\t\t\t|| 2. Thêm 1 máy mới                  || 8. Tính tiền                            ||");
+                    System.out.println("\t\t\t\t\t\t\t|| 3. Sửa đổi thông tin máy           || 9. Doanh thu theo thời gian             ||");
+                    System.out.println("\t\t\t\t\t\t\t|| 4. Xóa 1 máy                       || 10. Tổng doanh thu                      ||");
+                    System.out.println("\t\t\t\t\t\t\t|| 5. Thêm dịch vụ                    ||                                         ||");
+                    System.out.println("\t\t\t\t\t\t\t|| 6. Hiển thị tất cả dịch vụ         || 0. Quay lại                             ||");
+                    System.out.println("\t\t\t\t\t\t\t##=====================================*****=====================================##");
+                    System.out.print("\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
+                    choice = Integer.parseInt(scanner.nextLine());
+                    switch (choice) {
+                        case 1:
+                            displayComputer();
+                            break;
+                        case 2:
+                            Computer computer = managerComputer.addComputer();
+                            if (computer != null) {
+                                System.out.println("Tạo máy " + computer.getCode() + " thành công");
+                            } else {
+                                System.out.println("Tạo tài khoản thất bại");
+                            }
+                            break;
+                        case 3:
+                            managerComputer.displayAllComputer();
+                            updateComputer();
+                            break;
+                        case 4:
+                            managerComputer.displayAllComputer();
+                            deleteComputer();
+                            break;
+                        case 5:
+                            Service service = managerService.addService();
+                            if (service != null) {
+                                System.out.println("Thêm " + service.getName() + " thành công");
+                            } else {
+                                System.out.println("Thêm thất bại");
+                            }
+                            break;
+                        case 6:
+                            managerService.displayAllServices();
+                            break;
+                        case 7:
+                            System.out.print("Nhập số tiền 1 giờ/máy: ");
+                            double price = Double.parseDouble(scanner.nextLine());
+                            managerComputer.changePrice(price);
+                            break;
+                        case 8:
+                            payment();
+                            break;
+                        case 9:
+                            TurnoverByPeriod();
+                            break;
+                        case 10:
+                            double totalTurnover = managerComputer.totalTurnover();
+                            System.out.println("Tổng doanh thu: " + totalTurnover + " VND");
+                            break;
+                        case 0:
+                            flag = false;
+                            break;
                     }
-                    break;
-                case 3:
-                    managerComputer.displayAllComputer();
-                    updateComputer();
-                    break;
-                case 4:
-                    managerComputer.displayAllComputer();
-                    deleteComputer();
-                    break;
-                case 5:
-                    Service service = managerService.addService();
-                    if (service != null) {
-                        System.out.println("Thêm " + service.getName() + " thành công");
-                    } else {
-                        System.out.println("Thêm thất bại");
-                    }
-                    break;
-                case 6:
-                    managerService.displayAllServices();
-                    break;
-                case 7:
-                    System.out.print("Nhập số tiền 1 giờ/máy: ");
-                    double price = scanner.nextDouble();
-                    managerComputer.changePrice(price);
-                    break;
-                case 8:
-                    payment();
-                    break;
-                case 9:
-                    System.out.print("Nhập ngày bắt đầu: ");
-                    String startDay = scanner.nextLine();
-                    System.out.print("Nhập ngày kết thúc: ");
-                    String endDay = scanner.nextLine();
-                    LocalDate start = managerComputer.convertStringToDate(startDay);
-                    LocalDate end = managerComputer.convertStringToDate(endDay);
-                    double turnoverByDay = managerComputer.turnoverByDay(start, end);
-                    System.out.println("Tổng doanh thu từ " + startDay + " đến " + endDay + ": " + turnoverByDay + " VND");
+                } while (choice != 0);
 
-                    break;
-                case 10:
-                    double totalTurnover = managerComputer.totalTurnover();
-                    System.out.println("Tổng doanh thu: " + totalTurnover + " VND");
-                    break;
+            } catch (Exception e) {
+                System.err.println("\t\t\t\t\t\t\t_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_Không được đâu sói ạ_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
             }
-        } while (choice != 0);
+        }
+    }
+
+    private void TurnoverByPeriod() {
+        System.out.print("Từ ngày (dd-LL-yyyy): ");
+        String dateStart = scanner.nextLine();
+        System.out.print("Đến ngày (dd-LL-yyyy): ");
+        String dateEnd = scanner.nextLine();
+        if (validateDate(dateStart) && validateDate(dateEnd)) {
+            LocalDate start = managerComputer.convertStringToDate(dateStart);
+            LocalDate end = managerComputer.convertStringToDate(dateEnd);
+            double turnoverByDay = managerComputer.turnoverByDay(start, end);
+            if (dateStart.compareTo(dateEnd) >= 0) {
+                System.out.println("Ngày đầu lớn hơn ngày cuối...???");
+            } else {
+                System.out.println("Tổng doanh thu từ " + dateStart + " đến " + dateEnd + ": " + turnoverByDay + " VND");
+            }
+        } else {
+            System.out.println("Nhập sai định dạng ngày rồi");
+        }
     }
 
     private void payment() {
@@ -103,8 +127,7 @@ public class MainComputer {
             System.out.println("2. Thêm dịch vụ");
             System.out.println("0. Quay lại");
             System.out.print("Nhập vào lựa chọn của bạn: ");
-            choice1 = scanner.nextInt();
-            scanner.nextLine();
+            choice1 = Integer.parseInt(scanner.nextLine());
 
             if (choice1 == 1) {
                 managerComputer.payment();
@@ -130,8 +153,7 @@ public class MainComputer {
             System.out.println("2. Hiển thị toàn bộ máy offline");
             System.out.println("0. Quay lại");
             System.out.print("Nhập vào lựa chọn của bạn: ");
-            choice1 = scanner.nextInt();
-            scanner.nextLine();
+            choice1 = Integer.parseInt(scanner.nextLine());
             if (choice1 == 1) {
                 managerComputer.displayDetails();
             } else if (choice1 == 2) {
@@ -143,12 +165,12 @@ public class MainComputer {
     private void deleteComputer() {
         int deleteNumber;
         System.out.print("Nhập vào số thứ tự của máy: ");
-        deleteNumber = scanner.nextInt();
+        deleteNumber = Integer.parseInt(scanner.nextLine());
         int choice1;
         System.out.println("1. Xác nhận xoá");
         System.out.println("0. Không xoá");
         System.out.print("Nhập vào lựa chọn của bạn: ");
-        choice1 = scanner.nextInt();
+        choice1 = Integer.parseInt(scanner.nextLine());
         scanner.nextLine();
         if (choice1 == 1) {
             Computer computer = managerComputer.deleteComputer(deleteNumber);
@@ -163,7 +185,7 @@ public class MainComputer {
     private void updateComputer() {
         int updateNumber;
         System.out.print("Nhập vào số thứ tự của máy: ");
-        updateNumber = scanner.nextInt();
+        updateNumber = Integer.parseInt(scanner.nextLine());
         Computer computer = managerComputer.updateComputer(updateNumber);
         if (computer != null) {
             System.out.println("Sửa máy " + computer.getCode() + " thành công");
@@ -172,5 +194,10 @@ public class MainComputer {
         }
     }
 
-
+    private boolean validateDate(String date) {
+        String DATE_REGEX = "^([0-9]|[0-2][0-9]|3[0-1])[-](0[0-9]|1[0-2]|[0-9])[-]([0-9][0-9])?[0-9][0-9]$";
+        Pattern pattern = Pattern.compile(DATE_REGEX);
+        Matcher matcher = pattern.matcher(date);
+        return matcher.find();
+    }
 }

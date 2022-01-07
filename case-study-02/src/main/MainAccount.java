@@ -4,81 +4,74 @@ import manager.ManagerAccount;
 import module.Account;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainAccount {
     private final Scanner scanner = new Scanner(System.in);
-    private static Pattern pattern;
-    private static final String NUMBER_REGEX = "^(\\d+)$";
     ManagerAccount managerAccount = new ManagerAccount();
 
     public MainAccount() {
-        pattern = Pattern.compile(NUMBER_REGEX);
-    }
-
-    private boolean validateNumber(String regex) {
-        Matcher matcher = pattern.matcher(regex);
-        return !matcher.matches();
     }
 
     public void runMainAccount() {
         int choice;
-        do {
-            do {
-                System.out.println();
-                System.out.println("\t\t\t\t\t\t\t\t\t\t##==================QUẢN LÝ TÀI KHOẢN==================##");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t||    1. Hiển thị toàn bộ tài khoản quản lý            ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t||    2. Thêm tài khoản quản lý                        ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t||    3. Sửa thông tin tài khoản quản lý               ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t||    4. Xoá tài khoản quản lý                         ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t||    0. Quay lại                                      ||");
-                System.out.println("\t\t\t\t\t\t\t\t\t\t##=======================*****=========================##");
-                System.out.print("\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
-                choice = scanner.nextInt();
-                scanner.nextLine();
-            } while (validateNumber(Integer.toString(choice)) || choice < 0 || choice > 4);
+        boolean flag = true;
+        while (flag) {
+            try {
+                do {
+                    System.out.println();
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t##==================QUẢN LÝ TÀI KHOẢN==================##");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t||    1. Hiển thị toàn bộ tài khoản quản lý            ||");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t||    2. Thêm tài khoản quản lý                        ||");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t||    3. Sửa thông tin tài khoản quản lý               ||");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t||    4. Xoá tài khoản quản lý                         ||");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t||    0. Quay lại                                      ||");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t##=======================*****=========================##");
+                    System.out.print("\t\t\t\t\t\t\t\t\t\tNhập vào lựa chọn của bạn: ");
 
-            switch (choice) {
-                case 1:
-                    managerAccount.displayALlAccount();
-                    break;
-                case 2:
-                    Account createAccount = managerAccount.addAccount();
-                    if (createAccount != null) {
-                        System.out.println("Tạo tài khoản " + createAccount.getUsername() + " thành công");
-                    } else {
-                        System.out.println("Tạo tài khoản thất bại");
+                    choice = Integer.parseInt(scanner.nextLine());
+
+                    switch (choice) {
+                        case 1:
+                            managerAccount.displayALlAccount();
+                            break;
+                        case 2:
+                            Account createAccount = managerAccount.addAccount();
+                            if (createAccount != null) {
+                                System.out.println("Tạo tài khoản " + createAccount.getUsername() + " thành công");
+                            } else {
+                                System.out.println("Tạo tài khoản thất bại");
+                            }
+                            break;
+                        case 3:
+                            managerAccount.displayALlAccount();
+                            updateAccount();
+                            break;
+                        case 4:
+                            managerAccount.displayALlAccount();
+                            deleteAccount();
+                            break;
+                        case 0:
+                            flag = false;
+                            break;
                     }
-                    break;
-                case 3:
-                    managerAccount.displayALlAccount();
-                    updateAccount();
-                    break;
-                case 4:
-                    managerAccount.displayALlAccount();
-                    deleteAccount();
-                    break;
+                } while (choice != 0);
+            } catch (Exception e) {
+                System.err.println("\t\t\t\t\t\t\t\t\t\t_-_-_-_-_-_-_-_Nhập số đúng vào đi bạn ơi_-_-_-_-_-_-_-_");
             }
+        }
 
 
-        } while (choice != 0);
     }
 
     private void deleteAccount() {
         int deleteNumber;
-        do {
             System.out.print("Nhập vào số thứ tự của tài khoản: ");
-            deleteNumber = scanner.nextInt();
-        } while (validateNumber(Integer.toString(deleteNumber)));
+            deleteNumber = Integer.parseInt(scanner.nextLine());
         int choice1;
-        do {
             System.out.println("1. Xoá");
             System.out.println("0. Không");
             System.out.print("Nhập vào lựa chọn của bạn: ");
-            choice1 = scanner.nextInt();
-            scanner.nextLine();
-        } while (validateNumber(Integer.toString(choice1)) || choice1 < 0 || choice1 > 1);
+            choice1 = Integer.parseInt(scanner.nextLine());
         if (choice1 == 1) {
             Account account = managerAccount.deleteAccount(deleteNumber);
             if (account != null) {
@@ -91,10 +84,8 @@ public class MainAccount {
 
     private void updateAccount() {
         int updateNumber;
-        do {
             System.out.print("Nhập vào số thứ tự của tài khoản: ");
-            updateNumber = scanner.nextInt();
-        } while (validateNumber(Integer.toString(updateNumber)));
+            updateNumber = Integer.parseInt(scanner.nextLine());
         Account account = managerAccount.updateAccount(updateNumber);
         if (account != null) {
             System.out.println("Sửa tài khoản " + account.getUsername() + " thành công");
