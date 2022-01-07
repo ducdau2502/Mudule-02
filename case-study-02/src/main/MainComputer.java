@@ -75,50 +75,52 @@ public class MainComputer {
                     managerComputer.changePrice(price);
                     break;
                 case 8:
-                    int choice1;
-                    do {
-                        System.out.println("1. Thanh toán");
-                        System.out.println("2. Thêm dịch vụ");
-                        System.out.println("0. Quay lại");
-                        System.out.print("Nhập vào lựa chọn của bạn: ");
-                        choice1 = scanner.nextInt();
-                        scanner.nextLine();
-
-                        if (choice1 == 1) {
-                            managerComputer.payment();
-                        } else if (choice1 == 2) {
-                            try {
-                                managerService.displayAllServices();
-                                System.out.print("Chọn dịch vụ muốn thêm: ");
-                                int indexService = (scanner.nextInt() - 1);
-                                double priceService = services.get(indexService).getPrice();
-                                managerComputer.addServiceToComputer(priceService);
-                            } catch (Exception e) {
-                                System.out.println("Lỗi dữ liệu đầu vào");
-                            }
-                        }
-
-                    } while (choice1 != 0);
+                    payment();
                     break;
                 case 9:
                     System.out.print("Nhập ngày bắt đầu: ");
                     String startDay = scanner.nextLine();
-
                     System.out.print("Nhập ngày kết thúc: ");
                     String endDay = scanner.nextLine();
-                    System.out.print("Nhập tháng kết thúc: ");
                     LocalDate start = managerComputer.convertStringToDate(startDay);
                     LocalDate end = managerComputer.convertStringToDate(endDay);
                     double turnoverByDay = managerComputer.turnoverByDay(start, end);
-                    System.out.println("Tổng doanh thu từ " + start + " đến " + end + ": " + turnoverByDay + " VND");
+                    System.out.println("Tổng doanh thu từ " + startDay + " đến " + endDay + ": " + turnoverByDay + " VND");
 
                     break;
                 case 10:
                     double totalTurnover = managerComputer.totalTurnover();
-                    System.out.println("Tổng doang thu: " + totalTurnover + " VND");
+                    System.out.println("Tổng doanh thu: " + totalTurnover + " VND");
                     break;
             }
         } while (choice != 0);
+    }
+
+    private void payment() {
+        int choice1;
+        do {
+            System.out.println("1. Thanh toán");
+            System.out.println("2. Thêm dịch vụ");
+            System.out.println("0. Quay lại");
+            System.out.print("Nhập vào lựa chọn của bạn: ");
+            choice1 = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice1 == 1) {
+                managerComputer.payment();
+            } else if (choice1 == 2) {
+                try {
+                    managerService.displayAllServices();
+                    System.out.print("Chọn dịch vụ muốn thêm: ");
+                    int indexService = (scanner.nextInt() - 1);
+                    double priceService = services.get(indexService).getPrice();
+                    managerComputer.addServiceToComputer(priceService);
+                } catch (Exception e) {
+                    System.out.println("Lỗi dữ liệu đầu vào");
+                }
+            }
+
+        } while (choice1 != 0);
     }
 
     private void displayComputer() {
