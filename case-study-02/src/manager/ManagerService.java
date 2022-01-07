@@ -39,7 +39,6 @@ public class ManagerService {
             } while (name.equals(""));
             System.out.print("Nhập giá tiền của " + name + ": ");
             price = Double.parseDouble(scanner.nextLine());
-            scanner.nextLine();
             Service service = new Service(name, price);
             services.add(service);
             serviceIOFile.writeToFile(PATH, services);

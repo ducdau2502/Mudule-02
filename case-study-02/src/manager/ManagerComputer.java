@@ -103,14 +103,14 @@ public class ManagerComputer extends Thread {
 
     public boolean displayOnlineComputer() {
         boolean checkNull = true;
-        System.out.println();
-        System.out.printf("%-10S%S\n", "Máy", "trạng thái");
-        for (Computer computer : computers) {
-            if (computer.getStatus().equals("Online")) {
-                checkNull = false;
-                System.out.printf("%-10s%s\n", computer.getCode(), computer.getStatus());
+            System.out.println();
+            System.out.printf("%-10S%S\n", "Máy", "trạng thái");
+            for (Computer computer : computers) {
+                if (computer.getStatus().equals("Online")) {
+                    checkNull = false;
+                    System.out.printf("%-10s%s\n", computer.getCode(), computer.getStatus());
+                }
             }
-        }
         return checkNull;
     }
 

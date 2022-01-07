@@ -3,13 +3,11 @@ package main;
 import IOfiles.IOFile;
 import manager.ManagerComputer;
 import manager.ManagerService;
-import module.Account;
 import module.Computer;
 import module.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -135,8 +133,14 @@ public class MainComputer {
                 try {
                     managerService.displayAllServices();
                     System.out.print("Chọn dịch vụ muốn thêm: ");
-                    int indexService = (scanner.nextInt() - 1);
-                    double priceService = services.get(indexService).getPrice();
+                    int indexService = (Integer.parseInt(scanner.nextLine()) - 1);
+                    double price = services.get(indexService).getPrice();
+                    double quantity;
+                    do {
+                        System.out.print("Nhập số lượng muốn thêm: ");
+                        quantity = Double.parseDouble(scanner.nextLine());
+                    } while (quantity < 0);
+                    double priceService = price * quantity;
                     managerComputer.addServiceToComputer(priceService);
                 } catch (Exception e) {
                     System.out.println("Lỗi dữ liệu đầu vào");
