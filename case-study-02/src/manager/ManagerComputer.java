@@ -62,9 +62,11 @@ public class ManagerComputer extends Thread {
 
     public Computer addComputer() {
         int code;
-        System.out.print("Nhập số máy: ");
-        code = scanner.nextInt();
-        scanner.nextLine();
+        do {
+            System.out.print("Nhập số máy: ");
+            code = scanner.nextInt();
+            scanner.nextLine();
+        } while (checkCode(code));
         Computer computer = new Computer(code);
         computers.add(computer);
         changePrice(computers.get(0).getTimePrice());
@@ -83,9 +85,11 @@ public class ManagerComputer extends Thread {
         }
         if (computer != null) {
             int updateCode;
-            System.out.print("Nhập lại số máy: ");
-            updateCode = scanner.nextInt();
-            scanner.nextLine();
+            do {
+                System.out.print("Nhập lại số máy: ");
+                updateCode = scanner.nextInt();
+                scanner.nextLine();
+            } while (checkCode(updateCode));
             computer.setCode(updateCode);
             computers.set(updateNumber - 1, computer);
         }
@@ -247,7 +251,7 @@ public class ManagerComputer extends Thread {
 
     public double totalTurnover() {
         double sum = 0;
-        for(Turnover turnover : turnovers) {
+        for (Turnover turnover : turnovers) {
             sum += turnover.getTurnover();
         }
         return sum;
@@ -255,7 +259,7 @@ public class ManagerComputer extends Thread {
 
     public double turnoverByDay(LocalDate startDay, LocalDate endDay) {
         double sum = 0;
-        for(Turnover turnover : turnovers) {
+        for (Turnover turnover : turnovers) {
             if (startDay.compareTo(turnover.getDay()) < 0 && endDay.compareTo(turnover.getDay()) > 0) {
                 sum += turnover.getTurnover();
             }
