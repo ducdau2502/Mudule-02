@@ -64,8 +64,7 @@ public class ManagerComputer extends Thread {
         int code;
         do {
             System.out.print("Nhập số máy: ");
-            code = scanner.nextInt();
-            scanner.nextLine();
+            code = Integer.parseInt(scanner.nextLine());
         } while (checkCode(code));
         Computer computer = new Computer(code);
         computers.add(computer);
@@ -87,8 +86,7 @@ public class ManagerComputer extends Thread {
             int updateCode;
             do {
                 System.out.print("Nhập lại số máy: ");
-                updateCode = scanner.nextInt();
-                scanner.nextLine();
+                updateCode = Integer.parseInt(scanner.nextLine());
             } while (checkCode(updateCode));
             computer.setCode(updateCode);
             computers.set(updateNumber - 1, computer);
@@ -121,7 +119,7 @@ public class ManagerComputer extends Thread {
             System.out.println("Không có máy nào đang Online");
         } else {
             System.out.print("Nhập số máy muốn xem chi tiết ");
-            int index = (scanner.nextInt() - 1);
+            int index = (Integer.parseInt(scanner.nextLine()) - 1);
             boolean flag = true;
             System.out.println();
             System.out.printf("%-10S%-15S%-15S%-15S%-15S%S\n", "Máy", "trạng thái", "giá/giờ", "giờ sử dụng", "tiền dịch vụ", "tổng tiền");
@@ -155,7 +153,7 @@ public class ManagerComputer extends Thread {
             System.out.println("Không có mấy nào đang offline");
         } else {
             System.out.print("Nhập số máy muốn bật: ");
-            int index = (scanner.nextInt() - 1);
+            int index = (Integer.parseInt(scanner.nextLine()) - 1);
 
             boolean flag = true;
 
@@ -168,7 +166,7 @@ public class ManagerComputer extends Thread {
                         System.out.println("1. Bật");
                         System.out.println("0. Không");
                         System.out.print("Nhập lựa chọn: ");
-                        choice = scanner.nextInt();
+                        choice = Integer.parseInt(scanner.nextLine());
                         if (choice == 1) {
                             computers.get(i).changeStatus();
                             computers.get(i).setStartTime(System.currentTimeMillis());
@@ -189,7 +187,7 @@ public class ManagerComputer extends Thread {
             System.out.println("Không có mấy nào đang online");
         } else {
             System.out.print("Nhập số máy muốn thanh toán: ");
-            int index = (scanner.nextInt() - 1);
+            int index = (Integer.parseInt(scanner.nextLine()) - 1);
 
             boolean checkNull = true;
 
@@ -204,7 +202,7 @@ public class ManagerComputer extends Thread {
                         System.out.println("1. Thanh toán");
                         System.out.println("0. Huỷ");
                         System.out.print("Nhập lựa chọn: ");
-                        choice = scanner.nextInt();
+                        choice = Integer.parseInt(scanner.nextLine());
                         if (choice == 1) {
                             computers.get(i).changeStatus();
                             Date date = new Date((long) computers.get(i).getEndTime());
@@ -234,7 +232,7 @@ public class ManagerComputer extends Thread {
             System.out.println("Không có mấy nào đang online");
         } else {
             System.out.print("Nhập số máy muốn thêm dịch vụ: ");
-            int indexComputer = (scanner.nextInt() - 1);
+            int indexComputer = (Integer.parseInt(scanner.nextLine()) - 1);
 
             boolean checkNull = true;
             for (int i = 0; i < computers.size(); i++) {

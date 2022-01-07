@@ -33,10 +33,12 @@ public class ManagerService {
         String name;
         double price;
         try {
-            System.out.print("Nhập tên dịch vụ: ");
-            name = scanner.nextLine();
+            do {
+                System.out.print("Nhập tên dịch vụ: ");
+                name = scanner.nextLine();
+            } while (name.equals(""));
             System.out.print("Nhập giá tiền của " + name + ": ");
-            price = scanner.nextDouble();
+            price = Double.parseDouble(scanner.nextLine());
             scanner.nextLine();
             Service service = new Service(name, price);
             services.add(service);

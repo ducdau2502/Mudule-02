@@ -26,7 +26,7 @@ public class Main {
 
             boolean checkLogin = checkUsername(accounts, username) && checkPassword(accounts, password);
             if (checkLogin) {
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----Đăng nhập thành công-----\n");
+                System.out.println("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----Đăng nhập thành công-----");
                 int choice;
                 do {
                     System.out.println();
@@ -53,7 +53,7 @@ public class Main {
                     }
                 } while (true);
             } else {
-                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----Đăng nhập thất bại-----\n");
+                System.out.println("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t-----Đăng nhập thất bại-----");
             }
         }
     }
