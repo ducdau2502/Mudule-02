@@ -6,6 +6,7 @@ import manager.ManagerService;
 import module.Computer;
 import module.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -100,6 +101,17 @@ public class MainComputer {
                     } while (choice1 != 0);
                     break;
                 case 9:
+                    System.out.print("Nhập ngày bắt đầu: ");
+                    String startDay = scanner.nextLine();
+
+                    System.out.print("Nhập ngày kết thúc: ");
+                    String endDay = scanner.nextLine();
+                    System.out.print("Nhập tháng kết thúc: ");
+                    LocalDate start = managerComputer.convertStringToDate(startDay);
+                    LocalDate end = managerComputer.convertStringToDate(endDay);
+                    double turnoverByDay = managerComputer.turnoverByDay(start, end);
+                    System.out.println("Tổng doanh thu từ " + start + " đến " + end + ": " + turnoverByDay + " VND");
+
                     break;
                 case 10:
                     double totalTurnover = managerComputer.totalTurnover();

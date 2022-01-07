@@ -5,6 +5,9 @@ import module.Computer;
 import module.Turnover;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -201,16 +204,15 @@ public class ManagerComputer extends Thread {
                         if (choice == 1) {
                             computers.get(i).changeStatus();
                             Date date = new Date((long) computers.get(i).getEndTime());
-                            int day = date.getDate();
-                            int month = date.getMonth() + 1;
-                            int year = date.getYear() + 1900;
-                            turnovers.add(new Turnover(day, month, year, totalPrice));
+                            String date1 = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(DateTimeFormatter.ofPattern("dd-LL-yyyy"));
+                            LocalDate startDate = convertStringToDate(date1);
+                            turnovers.add(new Turnover(startDate, totalPrice));
                             computers.get(i).setEndTime(0);
                             computers.get(i).setStartTime(0);
                             computers.get(i).resetServicePrice();
                             System.out.println("Đã thanh toán: " + totalPrice + " VND");
 
-                            writeFileCSV(turnovers, PATH_TURNOVER);
+                            writeFileCSV(PATH_TURNOVER, turnovers);
                             computerIOFile.writeToFile(PATH, computers);
                             break;
                         }
@@ -248,24 +250,40 @@ public class ManagerComputer extends Thread {
         for(Turnover turnover : turnovers) {
             sum += turnover.getTurnover();
         }
-
         return sum;
     }
 
-    private void writeFileCSV(ArrayList<Turnover> turnovers, String path) {
+    public double turnoverByDay(LocalDate startDay, LocalDate endDay) {
+        double sum = 0;
+        for(Turnover turnover : turnovers) {
+            if (startDay.compareTo(turnover.getDay()) < 0 && endDay.compareTo(turnover.getDay()) > 0) {
+                sum += turnover.getTurnover();
+            }
+        }
+        return sum;
+
+    }
+
+    public LocalDate convertStringToDate(String string) {
+        String pattern = "dd-LL-yyyy";
+        return LocalDate.parse(string, DateTimeFormatter.ofPattern(pattern));
+    }
+
+    public String convertDateToString(LocalDate localDate) {
+        String pattern = "dd-LL-yyyy";
+        DateTimeFormatter ld = DateTimeFormatter.ofPattern(pattern);
+        return ld.format(localDate);
+    }
+
+    public void writeFileCSV(String path, ArrayList<Turnover> turnovers) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
             for (Turnover turnover : turnovers) {
-                bufferedWriter.append(String.valueOf(turnover.getDay()));
-                bufferedWriter.append(",");
-                bufferedWriter.append(String.valueOf(turnover.getMonth()));
-                bufferedWriter.append(",");
-                bufferedWriter.append(String.valueOf(turnover.getYear()));
+                bufferedWriter.append(convertDateToString(turnover.getDay()));
                 bufferedWriter.append(",");
                 bufferedWriter.append(String.valueOf(turnover.getTurnover()));
                 bufferedWriter.append("\n");
             }
-
             bufferedWriter.close();
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -284,11 +302,9 @@ public class ManagerComputer extends Thread {
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     String[] strings = line.split(",");
-                    int day = Integer.parseInt(strings[0]);
-                    int month = Integer.parseInt(strings[1]);
-                    int year = Integer.parseInt(strings[2]);
-                    double turnover = Double.parseDouble(strings[3]);
-                    turnovers.add(new Turnover(day, month, year, turnover));
+                    LocalDate localDate = convertStringToDate(strings[0]);
+                    double turnover = Double.parseDouble(strings[1]);
+                    turnovers.add(new Turnover(localDate, turnover));
                 }
             }
         } catch (IOException e) {

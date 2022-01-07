@@ -1,43 +1,25 @@
 package module;
 
+import java.time.LocalDate;
+
 public class Turnover {
-    private int day;
-    private int month;
-    private int year;
+    private LocalDate day;
     private double turnover;
 
     public Turnover() {
     }
 
-    public Turnover(int day, int month, int year, double turnover) {
+    public Turnover(LocalDate day, double turnover) {
         this.day = day;
-        this.month = month;
-        this.year = year;
         this.turnover = turnover;
     }
 
-    public int getDay() {
+    public LocalDate getDay() {
         return day;
     }
 
-    public void setDay(int day) {
+    public void setDay(LocalDate day) {
         this.day = day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 
     public double getTurnover() {
@@ -50,9 +32,9 @@ public class Turnover {
 
     @Override
     public String toString() {
-        return day +
-                "/" + month +
-                "/" + year +
-                ", doanh thu = " + turnover;
+        return "Turnover{" +
+                "day=" + day +
+                ", turnover=" + turnover +
+                '}';
     }
 }
