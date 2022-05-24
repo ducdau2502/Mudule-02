@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class ReadNumber {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhập vào 1 số từ 1 - 999999999 bất kỳ: ");
+        System.out.println("Nhập vào 1 số từ 1 - 999999 bất kỳ: ");
         String number = scanner.nextLine();
         System.out.println(ChuyenSo(number));
 
